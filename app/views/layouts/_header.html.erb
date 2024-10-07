@@ -1,0 +1,108 @@
+<header>
+  <%= link_to root_path , class:"nav-link" do %>
+    <%= image_tag 'kita.png' , size: "190x80" , class:"kita"%>
+  <% end %>
+
+  <nav>
+    <% if user_signed_in? %>
+    <div class="d-flex justify-content-end align-items-center ">
+      <ul class="navbar-nav" style="flex-direction: row;">
+        <li class="mr-4">
+          <span class="text-center" style="font-weight: 600;">
+            こんにちは、<%= current_customer.name %>さん
+          </span>
+        </li>
+        <li>
+          <%= link_to mypage_path(current_user.id) , class:"nav-link text-light" do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">マイページ</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_review_path , class:"nav-link text-light" do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">投稿</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to reviews_path , class:"nav-link text-light" do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">レビュー一覧</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to users_path , class:"nav-link text-light" do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">会員一覧</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete, class:"nav-link text-light" do%>
+            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 600; border-color: #d3d3d3;">ログアウト</button>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <%= text_field_tag :search, nil, placeholder: "Search" %>
+    </div>
+
+
+
+    <% elsif admin_signed_in? %>
+    <div class="d-flex justify-content-end align-items-center">
+      <ul class="navbar-nav" style="flex-direction: row;">
+        <li>
+          <%= link_to admin_users_path , class:"nav-link text-light" do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">会員一覧</button>
+            <!--<button type="button" class="btn btn-outline-secondary btn-custom" style="color: black; font-weight: 600; border-color: #d3d3d3;">商品一覧</button>-->
+          <% end %>
+        </li>
+        <li>
+          <%= link_to admin_reviews_path , class:"nav-link text-light" do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">レビュー一覧</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link text-light" do%>
+            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 600; border-color: #d3d3d3;">ログアウト</button>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <%= text_field_tag :search, nil, placeholder: "Search" %>
+    </div>
+
+
+
+    <% else %>
+    <div class="d-flex justify-content-end align-items-center ">
+      <ul class="navbar-nav" style="flex-direction: row;">
+        <li>
+          <%= link_to about_path  , class:"nav-link text-light" do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">About</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to  reviews_path , class:"nav-link text-light"  do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">レビュー一覧</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_registration_path , class:"nav-link text-light"  do %>
+            <button type="button" class="btn btn-outline-secondary mr-4" style="color: black; font-weight: 600; border-color: #d3d3d3;">新規登録</button>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to  new_user_session_path , class:"nav-link text-light"  do %>
+            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 600; border-color: #d3d3d3;">ログイン</button>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <%= text_field_tag :search, nil, placeholder: "Search" %>
+    </div>
+    <% end %>
+  </nav>
+</header>
