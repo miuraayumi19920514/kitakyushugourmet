@@ -1,0 +1,6 @@
+ja:
+  enums:
+    user:
+      local_person:
+        local: "地元民"
+        traveler: "旅行者"
