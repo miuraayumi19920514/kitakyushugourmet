@@ -13,6 +13,18 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
 
+
+
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+import Raty from "./raty.js"         // 同じ階層にあるraty.jsをRatyという名前でインポート
+
+// ratyアクションの定義
+window.raty = function(elem,opt){ 
+    var raty =  new Raty(elem,opt)
+    raty.init();
+    return raty;
+}

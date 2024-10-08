@@ -1,2 +1,52 @@
-<h1>User::Reviews#new</h1>
-<p>Find me in app/views/user/reviews/new.html.erb</p>
+<h2>レビューを投稿しよう！</h2>
+
+<%= form_with model: @review, url: '/reviews', method: :post do |f| %>
+
+  <div>
+    <%= f.label :shop , "お店の名前" %>
+    <%= f.text_field :shop, required: true %>
+  </div>
+  
+  <div>
+    <%= f.label :address , "お店の住所" %>
+    <%= f.text_field :address, required: true %>
+  </div>
+  
+  <div>
+    <%= f.label :title , "タイトル" %>
+    <%= f.text_field :title, required: true %>
+  </div>
+  
+  <div>
+    <%= f.label :body , "本文" %>
+    <%= f.text_field :body, required: true %>
+  </div>
+  
+  <div class="form-group position-static">
+      <div id="post_raty">初見の入りやすさ：</div> <!-- 星を出力するセレクタ -->
+      <% if @review.id.nil? %> <!-- 新規投稿か判別 -->
+        <script>
+            var elem = document.querySelector('#post_raty');
+            var opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                scoreName: 'review[star]',
+            };
+            raty(elem,opt);
+        </script>
+      <% end %>
+  </div>
+  
+  <div>
+    <%= f.label :image , "画像" %>
+    <%= f.file_field :image %><br>
+    <%= f.file_field :image %><br>
+    <%= f.file_field :image %><br>
+    <%= f.file_field :image %>
+  </div>
+  
+  <div>
+    <%= f.submit "投稿" , class: "btn btn-success w-40" %>
+  </div>
+
+<% end %>
