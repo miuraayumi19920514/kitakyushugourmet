@@ -1,6 +1,6 @@
 <h2>編集</h2>
 
-<%= form_with model: @review do |f| %>
+<%= form_with model: @review, url: review_path(@review), method: :patch do |f| %>
 
   <div>
     <%= f.label :shop , "お店の名前" %>
@@ -24,17 +24,18 @@
   
   <div class="form-group position-static">
       <div id="post_raty">初見の入りやすさ：</div> <!-- 星を出力するセレクタ -->
-      <% if @review.id.nil? %> <!-- 新規投稿か判別 -->
+      
         <script>
             var elem = document.querySelector('#post_raty');
             var opt = {
                 starOn: "<%= asset_path('star-on.png') %>",
                 starOff: "<%= asset_path('star-off.png') %>",
                 scoreName: 'review[star]',
+                score: <%= @review.star %>
             };
             raty(elem,opt);
         </script>
-      <% end %>
+
   </div>
   
   <div>

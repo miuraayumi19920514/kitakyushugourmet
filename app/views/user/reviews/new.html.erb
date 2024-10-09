@@ -1,5 +1,11 @@
 <h2>レビューを投稿しよう！</h2>
 
+  <ul>
+    <% @review.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+
 <%= form_with model: @review, url: '/reviews', method: :post do |f| %>
 
   <div>
