@@ -1,2 +1,24 @@
-<h1>User::Reviews#index</h1>
-<p>Find me in app/views/user/reviews/index.html.erb</p>
+<h2>レビュー一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>店名</th>
+      <th>タイトル</th>
+      <th>投稿者</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td>
+          <%= I18n.t("enums.user.local_person.#{review.user.local_person}") %>
+        </td>
+        <td><%= link_to review.shop , review_path(review) %></td>
+        <td><%= review.title %></td>
+        <td><%= review.user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
