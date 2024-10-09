@@ -1,2 +1,35 @@
-<h1>User::Reviews#show</h1>
-<p>Find me in app/views/user/reviews/show.html.erb</p>
+<h2>店名：<%= @review.shop %></h2>
+
+<div>
+  投稿：<%= I18n.t("enums.user.local_person.#{@review.user.local_person}") %>
+</div>
+<div>
+  初見の入りやすさ度：<%= render "output_star", review: @review %>
+</div>
+
+<div>
+  <h4><%= @review.title %></h4>
+  <%= @review.body %>
+</div>
+
+<div>
+  <%= image_tag @review.get_image(100,100) %>
+  <%= image_tag @review.get_image(100,100) %>
+  <%= image_tag @review.get_image(100,100) %>
+  <%= image_tag @review.get_image(100,100) %>
+</div>
+
+<div>
+  <% if @review.user == current_user %> 
+    <%= link_to "編集" , edit_review_path(@review) %>
+    <%= link_to "削除" , review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  <% end %>
+</div>
+
+<div>
+  この記事は
+  <%= link_to user_path(@user) do %>
+    <%= @user.name %>さん
+  <% end %>
+  が書きました
+</div>
