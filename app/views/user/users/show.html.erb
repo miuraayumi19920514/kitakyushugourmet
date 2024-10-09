@@ -1,2 +1,48 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<h2><%= @user.name %>さんのページ</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><%= image_tag @user.get_image(200,200) %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= I18n.t("enums.user.local_person.#{@user.local_person}") %>
+      </th>
+    </tr>
+    <tr>
+      <th>名前</th>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th>一言</th>
+      <td><%= @user.introduction %></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h5><%= @user.name %>さんのレビュー一覧</h5>
+
+  <% if @reviews.empty? %>
+    投稿はまだありません
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>店名</th>
+          <th>タイトル</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reviews.each do |review| %>
+          <tr>
+            <td><%= link_to review.shop , review_path(review) %></td>
+            <td><%= review.title %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>

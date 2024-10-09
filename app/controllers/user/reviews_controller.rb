@@ -12,7 +12,7 @@ class User::ReviewsController < ApplicationController
       flash[:notice]="レビュー投稿しました"
       redirect_to mypage_path
     else
-      redirect_to request.referer
+      render :new
     end
   end
 

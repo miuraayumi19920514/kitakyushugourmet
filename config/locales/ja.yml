@@ -5,9 +5,9 @@ ja:
         local: "地元民"
         traveler: "旅行者"
         
-errors:
-  messages:
-    not_saved: "エラーが発生したため、保存されませんでした。"
+  errors:
+    messages:
+      not_saved: "エラーが発生したため、保存されませんでした。"
     
     
   activerecord:

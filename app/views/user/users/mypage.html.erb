@@ -1,2 +1,54 @@
-<h1>User::Users#mypage</h1>
-<p>Find me in app/views/user/users/mypage.html.erb</p>
+<h2>マイページ</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><%= image_tag @user.get_image(200,200) %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= I18n.t("enums.user.local_person.#{@user.local_person}") %>
+      </th>
+    </tr>
+    <tr>
+      <th>名前</th>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <th>一言</th>
+      <td><%= @user.introduction %></td>
+    </tr>
+  </tbody>
+</table>
+<div>
+  <%= link_to "プロフィール編集" , information_edit_path %><br>
+  <%= link_to "退会する" , unsubscribe_path %>
+</div>
+
+
+
+
+<h5>マイレビュー一覧</h5>
+
+  <% if @reviews.empty? %>
+    投稿はまだありません
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>店名</th>
+          <th>タイトル</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reviews.each do |review| %>
+          <tr>
+            <td><%= link_to review.shop , review_path(review) %></td>
+            <td><%= review.title %></td>
+            <td><%= link_to "編集" , edit_review_path(review) %></td>
+            <td><%= link_to "削除" , review_path(review), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>

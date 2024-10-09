@@ -1,2 +1,24 @@
-<h1>User::Users#edit</h1>
-<p>Find me in app/views/user/users/edit.html.erb</p>
+<h2>プロフィール編集</h2>
+
+<%= form_with model: @user, url: information_path, method: :patch do |f| %>
+
+<div>
+  <%= f.label :image , "アイコン画像" %>
+  <%= f.file_field :image %>
+</div>
+
+<div>
+  <%= f.label :name, "表示名" %>
+  <%= f.text_field :name, required: true %>
+</div>
+
+<div>
+  <%= f.label :introduction, "一言" %>
+  <%= f.text_field :introduction %>
+</div>
+
+<div>
+  <%= f.submit "変更", class: "btn btn-success w-40" %>
+</div>
+
+<% end %>
