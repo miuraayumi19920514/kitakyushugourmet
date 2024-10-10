@@ -20,7 +20,7 @@
 </div>
 
 <div>
-  <% if @review.user == current_user %> 
+  <% if @review.user == current_user %>
     <%= link_to "編集" , edit_review_path(@review) %>
     <%= link_to "削除" , review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" } %>
   <% end %>
@@ -33,3 +33,16 @@
   <% end %>
   が書きました
 </div>
+
+<div id="favorite_buttons_<%= @review.id %>">
+  <%= render "user/favorites/favorite", review: @review %>
+</div>
+
+<div id = "comment_textarea" >
+  <%= render "user/comments/form", review: @review, comment: @comment %>
+</div>
+<div id = "comment_index" >
+  <%= render "user/comments/index", review: @review %>
+</div>
+
+

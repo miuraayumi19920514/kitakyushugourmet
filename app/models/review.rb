@@ -18,5 +18,10 @@ class Review < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
 
+  def favorited?(user)
+    return false unless user
+    favorites.where(user_id: user.id).exists?
+  end
+
 end
 

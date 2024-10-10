@@ -18,6 +18,10 @@
       <th>一言</th>
       <td><%= @user.introduction %></td>
     </tr>
+     <tr>
+      <th>いいね一覧</th>
+      <td><%= link_to "見る", user_favorites_path(@user) %></td>
+    </tr>
   </tbody>
 </table>
 <div>
@@ -38,6 +42,10 @@
         <tr>
           <th>店名</th>
           <th>タイトル</th>
+          <th>コメント数</th>
+          <th>いいね数</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -45,6 +53,10 @@
           <tr>
             <td><%= link_to review.shop , review_path(review) %></td>
             <td><%= review.title %></td>
+            <td id = "comment_count">
+              <%= render "user/comments/count", review: review %>
+            </td>
+            <td><%= review.favorites.count %></td>
             <td><%= link_to "編集" , edit_review_path(review) %></td>
             <td><%= link_to "削除" , review_path(review), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
           </tr>

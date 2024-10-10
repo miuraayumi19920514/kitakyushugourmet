@@ -7,7 +7,7 @@ class User::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.all#退会した人を非表示にするにはここに何かを書く
   end
 
   def show

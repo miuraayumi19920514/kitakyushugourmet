@@ -25,12 +25,14 @@ Rails.application.routes.draw do
     get '/users/unsubscribe' => 'users#unsubscribe' ,as: 'unsubscribe'
     patch '/users/information' => 'users#update' ,as: 'information'
     patch '/users/withdraw' => 'users#withdraw' ,as: 'withdraw'
-    resources :users, only: [:index, :show]
-    
+    resources :users, only: [:index, :show] do
+      resources :favorites, only: [:index]
+    end
     resources :reviews do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
+    
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
