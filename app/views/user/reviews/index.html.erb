@@ -6,7 +6,8 @@
       <th></th>
       <th>店名</th>
       <th>タイトル</th>
-      <th>投稿者</th>
+      <th>コメント数</th>
+      <th>いいね</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +18,12 @@
         </td>
         <td><%= link_to review.shop , review_path(review) %></td>
         <td><%= review.title %></td>
-        <td><%= review.user.name %></td>
+        <td id = "comment_count">
+          <%= render "user/comments/count", review: review %>
+        </td>
+        <td id = "favorite_buttons_<%= review.id %>">
+          <%= render "user/favorites/favorite", review: review %>
+        </td>
       </tr>
     <% end %>
   </tbody>

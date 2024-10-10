@@ -1,0 +1,18 @@
+
+
+<h3>コメント一覧</h3>
+
+  <table>
+    <tbody>
+      <% review.comments.each do |comment| %>
+        <tr>
+            <td><%= comment.comment %></td>
+            <td><%= comment.user.name %></td>
+            <td><% if comment.user == current_user %>
+                  <%= link_to "destroy", review_comment_path(comment.review, comment), method: :delete , data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %>
+                <% end %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

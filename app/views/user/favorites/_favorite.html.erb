@@ -1,0 +1,9 @@
+<% if review.favorited?(current_user) %>
+  <%= link_to review_favorites_path(review), method: :delete, remote: true, data: {"turbolinks" => false} do %>
+    <span style="color:red;">❤︎</span><%= review.favorites.count %>
+  <% end %>
+<% else %>
+  <%= link_to review_favorites_path(review), method: :post, remote: true, data: {"turbolinks" => false} do %>
+    <span>♡</span><%= review.favorites.count %>
+  <% end %>
+<% end %>

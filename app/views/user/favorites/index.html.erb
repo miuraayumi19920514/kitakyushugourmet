@@ -1,0 +1,36 @@
+<% if @user == current_user %>
+  <h2>Myいいね一覧</h2>
+<% else %>
+  <h2><%= @user.name %>さんのいいね一覧</h2>
+<% end %>
+
+<% if @favorites.empty? %>
+  まだ、いいねしてません。
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>店名</th>
+        <th>タイトル</th>
+        <th>コメント数</th>
+        <th>いいね</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @favorites.each do |favorite| %>
+        <tr>
+          <td><%= I18n.t("enums.user.local_person.#{favorite.review.user.local_person}") %></td>
+          <td><%= link_to favorite.review.shop , review_path(favorite.review) %></td>
+          <td><%= favorite.review.title %></td>
+          <td id = "comment_count">
+            <%= render "user/comments/count", review: favorite.review %>
+          </td>
+          <td id="favorite_buttons_<%= favorite.review.id %>">
+            <%= render "user/favorites/favorite", review: favorite.review %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
