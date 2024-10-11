@@ -1,18 +1,25 @@
-<h2>会員一覧</h2>
+<div class = "container col-5 mt-5 mb-5">
 
-<table>
-  <thead>
-    <tr>
-      <th>ユーザー名</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+  <div class = "mt-4 mb-5">
+    <h2>全てのユーザー</h2>
+  </div>
+
+  <table class="table border">
+    <thead style="background-color: #ffe6ee;">
       <tr>
-        <td><%=link_to user.name , user_path(user) %></td>
-        <td><%= I18n.t("enums.user.local_person.#{user.local_person}") %></td>
+        <th class = "poster">投稿者</th>
+        <th class = "table-column">ユーザー名</th>
+        <th class = "table-column">レビュー数</th>
       </tr>
-    </tbody>
-  <% end %>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td class="poster"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></td>
+          <td class = "table-column"><h4><%=link_to user.name , user_path(user) %></h4></td>
+          <td class = "table-column"><%= user.reviews.count %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>

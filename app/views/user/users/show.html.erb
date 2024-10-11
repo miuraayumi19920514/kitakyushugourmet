@@ -1,60 +1,66 @@
-<h2><%= @user.name %>さんのページ</h2>
-
-<table>
-  <tbody>
-    <tr>
-      <td><%= image_tag @user.get_image(200,200) %></td>
-    </tr>
-    <tr>
-      <th>
-        <%= I18n.t("enums.user.local_person.#{@user.local_person}") %>
-      </th>
-    </tr>
-    <tr>
-      <th>名前</th>
-      <td><%= @user.name %></td>
-    </tr>
-    <tr>
-      <th>一言</th>
-      <td><%= @user.introduction %></td>
-    </tr>
-    <tr>
-      <th>いいね一覧</th>
-      <td><%= link_to "見る", user_favorites_path(@user) %></td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-
-<h5><%= @user.name %>さんのレビュー一覧</h5>
-
-  <% if @reviews.empty? %>
-    投稿はまだありません
-  <% else %>
+<div class = "container col-5 mt-5 mb-5">
+  <div class = "container border mt-5 pt-3 pb-3 px-5">
+    <h2><%= @user.name %>さんのページ</h2>
+  
     <table>
-      <thead>
-        <tr>
-          <th>店名</th>
-          <th>タイトル</th>
-          <th>コメント数</th>
-          <th>いいね</th>
-        </tr>
-      </thead>
       <tbody>
-        <% @reviews.each do |review| %>
-          <tr>
-            <td><%= link_to review.shop , review_path(review) %></td>
-            <td><%= review.title %></td>
-            <td id = "comment_count">
-              <%= render "user/comments/count", review: review %>
-            </td>
-            <td id = "favorite_buttons_<%= review.id %>">
-              <%= render "user/favorites/favorite", review: review %>
-            </td>
-          </tr>
-        <% end %>
+        <tr>
+          <td><%= image_tag @user.get_image(200,200) %></td>
+        </tr>
+        <tr>
+          <th>
+            <%= I18n.t("enums.user.local_person.#{@user.local_person}") %>
+          </th>
+        </tr>
+        <tr>
+          <th>名前</th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>一言</th>
+          <td><%= @user.introduction %></td>
+        </tr>
+        <tr>
+          <th>いいね一覧</th>
+          <td><%= link_to "見る", user_favorites_path(@user) %></td>
+        </tr>
       </tbody>
     </table>
-  <% end %>
+  </div>
+  
+  
+  <div>
+    <div class = "mt-4 mb-2">
+      <h5><%= @user.name %>さんのレビュー一覧</h5>
+    </div>
+    
+      <% if @reviews.empty? %>
+        投稿はまだありません
+      <% else %>
+        <table class="table border">
+          <thead style="background-color: #ffe6ee;">
+            <tr>
+              <th class = "table-column">店名</th>
+              <th class = "table-column">タイトル</th>
+              <th class = "table-column">コメント数</th>
+              <th class = "table-column">いいね</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reviews.each do |review| %>
+              <tr>
+                <td class = "table-column"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+                <td class = "table-column"><%= review.title %></td>
+                <td class = "table-column" id = "comment_count">
+                  <%= render "user/comments/count", review: review %>
+                </td>
+                <td class = "table-column" id = "favorite_buttons_<%= review.id %>">
+                  <%= render "user/favorites/favorite", review: review %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+  </div>
+</div>
