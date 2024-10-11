@@ -1,8 +1,16 @@
-<h2>本当に退会しますか？</h2>
-<div>
-  <%= link_to "はい", withdraw_path,method: :patch %>
-</div>
-
-<div>
-  <%= link_to "いいえ", mypage_path %>
+<div class = "container col-5 pt-5 mt-5 mb-5">
+  
+  <div class="d-flex justify-content-center mt-5">
+    <h2>本当に退会しますか？</h2>
+  </div>
+  
+  <div class="d-flex justify-content-center mt-5">
+    <div class = "pr-5 mr-5">
+      <%= link_to "はい", withdraw_path,method: :patch, class: "btn btn-success btn-fixed-width" %>
+    </div>
+    
+    <div>
+      <%= link_to "いいえ", mypage_path, class: "btn btn-danger btn-fixed-width" %>
+    </div>
+  </div>
 </div>

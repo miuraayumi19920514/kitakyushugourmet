@@ -1,36 +1,42 @@
-<% if @user == current_user %>
-  <h2>Myいいね一覧</h2>
-<% else %>
-  <h2><%= @user.name %>さんのいいね一覧</h2>
-<% end %>
-
-<% if @favorites.empty? %>
-  まだ、いいねしてません。
-<% else %>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>店名</th>
-        <th>タイトル</th>
-        <th>コメント数</th>
-        <th>いいね</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @favorites.each do |favorite| %>
+<div class = "container col-5 mt-5 mb-5">
+  <% if @user == current_user %>
+    <div class = "mt-4 mb-5">
+      <h2>Myいいね一覧</h2>
+    </div>
+  <% else %>
+    <div class = "mt-4 mb-5">
+      <h2><%= @user.name %>さんのいいね一覧</h2>
+    </div>
+  <% end %>
+  
+  <% if @favorites.empty? %>
+    まだ、いいねしてません。
+  <% else %>
+    <table class="table border">
+      <thead style="background-color: #ffe6ee;">
         <tr>
-          <td><%= I18n.t("enums.user.local_person.#{favorite.review.user.local_person}") %></td>
-          <td><%= link_to favorite.review.shop , review_path(favorite.review) %></td>
-          <td><%= favorite.review.title %></td>
-          <td id = "comment_count">
-            <%= render "user/comments/count", review: favorite.review %>
-          </td>
-          <td id="favorite_buttons_<%= favorite.review.id %>">
-            <%= render "user/favorites/favorite", review: favorite.review %>
-          </td>
+          <th class="poster">投稿者</th>
+          <th class = "table-column">店名</th>
+          <th class = "table-column">タイトル</th>
+          <th class = "table-column">コメント数</th>
+          <th class = "table-column">いいね</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+      </thead>
+      <tbody>
+        <% @favorites.each do |favorite| %>
+          <tr>
+            <td class="poster"><%= I18n.t("enums.user.local_person.#{favorite.review.user.local_person}") %></td>
+            <td class = "table-column"><h4><%= link_to favorite.review.shop , review_path(favorite.review) %></h4></td>
+            <td class = "table-column"><%= favorite.review.title %></td>
+            <td class = "table-column" id = "comment_count">
+              <%= render "user/comments/count", review: favorite.review %>
+            </td>
+            <td class = "table-column" id="favorite_buttons_<%= favorite.review.id %>">
+              <%= render "user/favorites/favorite", review: favorite.review %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

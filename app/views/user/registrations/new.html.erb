@@ -1,57 +1,69 @@
 <%= render "user/shared/error_messages", resource: resource %>
 
 
-<div class="container">
+<div class="container border col-5 mt-5 mb-5">
   <%= form_with model: User.new, url: user_registration_path do |f| %>
 
-  <div class="row">
-    <div class="col">
-      <h2>会員登録</h2>
+  <div class = "mt-4">
+    <h2>アカウント作成</h2>
+  </div>
+
+  <div class= "text-center mt-5 mb-4">
+    <div class="border col-7 mx-auto" style="background-color: #ffe6ee;">
+      アカウントを作成すると<br>
+      レビューの投稿・いいね・コメント・Myページ<br>
+      が使えるようになります。
+    </div>
+  </div>
+
+  <div class = "mt-5 row justify-content-center">
+    <div class="col-4">
+      <%= f.label :name, "★表示名" %><br>
+      <%= f.text_field :name %>
     </div>
   </div>
 
 
-  <div class="row">
-    <div class="col-1"><%= f.label :name, "★表示名" %><br>
-    <div class="col-3"><%= f.text_field :name %></div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-3"><%= f.label :email, "★メールアドレス" %><br>
-    <div class="col-3"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
+  <div class = "mt-4 row justify-content-center">
+    <div class="col-4">
+      <%= f.label :email, "★メールアドレス" %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
   </div>
 
 
-  <div class="row">
-    <div class="col-3"><%= f.label :password,"★パスワード(６文字以上)" %><br>
-    <div class="col-3"><%= f.password_field :password, autocomplete: "new-password" %></div>
+  <div class = "mt-4 row justify-content-center">
+    <div class="col-4">
+      <%= f.label :password,"★パスワード(６文字以上)" %><br>
+      <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-3"><%= f.label :password_confirmation, "★パスワード（確認用）" %><br>
-    <div class="col-3"><%= f.password_field :password_confirmation, autocomplete: "new-password" %></div>
+  <div class = "mt-4 row justify-content-center">
+    <div class="col-4">
+      <%= f.label :password_confirmation, "★パスワード（確認用）" %><br>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
   </div>
-  
-  <div class="row">
-    <div class="col-3"><%= f.label :local_person, "★北九州の人ですか？"%><br>
+
+  <div class = "mt-4 row justify-content-center">
+    <div class="col-4">
+    <%= f.label :local_person, "★北九州の人ですか？"%><br>
       <div class="form-check">
-        <div class="col-5"><%= f.radio_button :local_person, :local, id: "local_person", class: "form-check-input" %></div>
-        <div class="col-5"><%= f.label :local_person, "yes", class: "form-check-label" %></div>
+        <%= f.radio_button :local_person, :local, id: "local_person", class: "form-check-input" %>
+        <%= f.label :local_person, "yes", class: "form-check-label" %>
       </div>
       <div class="form-check">
-        <div class="col-5"><%= f.radio_button :local_person, :traveler, id: "local_person", class: "form-check-input" %></div>
-        <div class="col-5"><%= f.label :local_person, "no", class: "form-check-label" %></div>
+        <%= f.radio_button :local_person, :traveler, id: "local_person", class: "form-check-input" %>
+        <%= f.label :local_person, "no", class: "form-check-label" %>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-3"><%= f.submit "登録" %></div>
+  <div class = "d-flex justify-content-center mt-5 mb-4">
+    <%= f.submit "作成" , class: "btn btn-primary" %>
   </div>
-  
+
   <% end %>
 </div>
