@@ -37,8 +37,11 @@ class User::UsersController < ApplicationController
     @user = current_user
     @user.update(is_active: false)
     reset_session
-    flash[:notice] = "退会しました"
-    redirect_to root_path
+    redirect_to completion_path
+  end
+  
+  def completion
+    
   end
   
   private

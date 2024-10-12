@@ -7,12 +7,27 @@
   text-align: center;
 }
 
-// userのindex,userのshow,mypage,reviewのindex,favoriteのindexページのテーブルの列の文字の中央揃え
-.table-column {
-  text-align: center;
-}
-
 // 退会ページのボタン
 .btn-fixed-width {
   width: 100px;
+}
+
+// プロフィールの地元マーク
+.person_local {
+  background-color: #669900;
+  width: 80px;
+  text-align: center;
+  color: white;
+}
+
+.person_traveler {
+  background-color: #FF9900;
+  width: 80px;
+  text-align: center;
+  color: white;
+}
+
+header {
+  width: 100%;
+  height: 150px;
 }

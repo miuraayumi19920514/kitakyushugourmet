@@ -5,7 +5,7 @@ class User::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   
   def after_sign_up_path_for(resource)
-     reviews_path
+     mypage_path
   end
   
   def configure_sign_up_params

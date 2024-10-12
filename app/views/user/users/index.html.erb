@@ -8,16 +8,16 @@
     <thead style="background-color: #ffe6ee;">
       <tr>
         <th class = "poster">投稿者</th>
-        <th class = "table-column">ユーザー名</th>
-        <th class = "table-column">レビュー数</th>
+        <th class = "text-center">ユーザー名</th>
+        <th class = "text-center">レビュー数</th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
           <td class="poster"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></td>
-          <td class = "table-column"><h4><%=link_to user.name , user_path(user) %></h4></td>
-          <td class = "table-column"><%= user.reviews.count %></td>
+          <td class = "text-center"><h4><%=link_to user.name , user_path(user) %></h4></td>
+          <td class = "text-center"><%= user.reviews.count %></td>
         </tr>
       </tbody>
     <% end %>
