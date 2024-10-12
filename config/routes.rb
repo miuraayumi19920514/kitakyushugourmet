@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     sessions: 'user/sessions'
   }
 
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
 
@@ -18,13 +18,14 @@ Rails.application.routes.draw do
 
   scope module: :user do
     root to: 'homes#top'
-    get '/about' => 'homes#about' ,as: 'about'
+    get '/about' => 'homes#about', as: 'about'
     
-    get '/users/mypage' =>'users#mypage' ,as: 'mypage'
-    get '/users/infomation/edit' => 'users#edit' ,as: 'information_edit'
-    get '/users/unsubscribe' => 'users#unsubscribe' ,as: 'unsubscribe'
-    patch '/users/information' => 'users#update' ,as: 'information'
-    patch '/users/withdraw' => 'users#withdraw' ,as: 'withdraw'
+    get '/users/mypage' =>'users#mypage', as: 'mypage'
+    get '/users/infomation/edit' => 'users#edit', as: 'information_edit'
+    get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+    get '/users/unsubscribe/completion' => 'users#completion', as: 'completion'
+    patch '/users/information' => 'users#update', as: 'information'
+    patch '/users/withdraw' => 'users#withdraw', as: 'withdraw'
     resources :users, only: [:index, :show] do
       resources :favorites, only: [:index]
     end

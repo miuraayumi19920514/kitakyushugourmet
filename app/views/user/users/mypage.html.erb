@@ -1,53 +1,55 @@
 <div class = "container col-5 mt-5 mb-5">
-  <div class = "container border mt-5 pt-3 pb-3 px-5">
+  <div class = "border mt-5 pt-3 pb-3 px-5">
     <h2>マイページ</h2>
-    
-    <table>
-      <tbody>
-        <tr>
-          <td><%= image_tag @user.get_image(200,200) %></td>
-        </tr>
-        <tr>
-          <th>
-            <%= I18n.t("enums.user.local_person.#{@user.local_person}") %>
-          </th>
-        </tr>
-        <tr>
-          <th>名前</th>
-          <td><%= @user.name %></td>
-        </tr>
-        <tr>
-          <th>一言</th>
-          <td><%= @user.introduction %></td>
-        </tr>
-         <tr>
-          <th>いいね一覧</th>
-          <td><%= link_to "見る", user_favorites_path(@user) %></td>
-        </tr>
-      </tbody>
-    </table>
-    <div>
-      <%= link_to "プロフィール編集" , information_edit_path %><br>
-      <%= link_to "退会する" , unsubscribe_path %>
-    </div>
-  </div>  
-    
-    
+
+      <div class = "container">
+        
+        <% if @user.local_person == "local" %>
+          <h4 class="person_local mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
+        <% else %>
+          <h4 class="person_traveler mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
+        <% end %>
+        
+        <div class = "row">
+          <div class = "col-5 d-flex flex-column mt-2">
+            <%= image_tag @user.get_image(300,300) %>
+          </div>
+          <div class = "col-7 d-flex flex-column mt-2">
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <th>名前：</th><td><h4><%= @user.name %></h4></td>
+                </tr>
+                <tr>
+                  <th>一言：</th><td><%= @user.introduction %></td>
+                </tr>
+                <tr>
+                  <th>Mいいね一覧：</th><td><%= link_to "見る", user_favorites_path(@user) %></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class = "text-center"><%= link_to "編集" , information_edit_path, class: "btn btn-sm btn-success" %></div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
   <div>
     <div class = "mt-4 mb-2">
       <h5>マイレビュー一覧</h5>
     </div>
-    
+
     <% if @reviews.empty? %>
       投稿はまだありません
     <% else %>
       <table class="table border">
         <thead style="background-color: #ffe6ee;">
           <tr>
-            <th class = "table-column">店名</th>
-            <th class = "table-column">タイトル</th>
-            <th class = "table-column">コメント数</th>
-            <th class = "table-column">いいね数</th>
+            <th class = "text-center">店名</th>
+            <th class = "text-center">タイトル</th>
+            <th class = "text-center">コメント数</th>
+            <th class = "text-center">いいね数</th>
             <th></th>
             <th></th>
           </tr>
@@ -55,18 +57,19 @@
         <tbody>
           <% @reviews.each do |review| %>
             <tr>
-              <td class = "table-column"><h4><%= link_to review.shop , review_path(review) %></h4></td>
-              <td class = "table-column"><%= review.title %></td>
-              <td class = "table-column" id = "comment_count">
+              <td class = "text-center"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+              <td class = "text-center"><%= review.title %></td>
+              <td class = "text-center" id = "comment_count">
                 <%= render "user/comments/count", review: review %>
               </td>
-              <td class = "table-column"><%= review.favorites.count %></td>
-              <td><%= link_to "編集" , edit_review_path(review) %></td>
-              <td><%= link_to "削除" , review_path(review), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+              <td class = "text-center"><%= review.favorites.count %></td>
+              <td><%= link_to "編集" , edit_review_path(review), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to "削除" , review_path(review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     <% end %>
   </div>
+  <h4 class = "text-center mt-5"><%= link_to "退会する" , unsubscribe_path, class: "btn btn-danger" %></h4>
 </div>

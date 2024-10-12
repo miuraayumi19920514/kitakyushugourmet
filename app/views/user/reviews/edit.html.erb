@@ -1,7 +1,7 @@
 <div class = "container border col-5 mt-5 mb-5">
   
   <div class = "mt-4">
-    <h3>レビュー編集</h3>
+    <h2>レビュー編集</h2>
   </div>
   
   <%= form_with model: @review, url: review_path(@review), method: :patch do |f| %>
@@ -42,7 +42,7 @@
     
     <div class="mt-4">
       <%= f.label :image , "写真" %><br>
-      <%= f.file_field :image %>
+      <%= f.file_field :image, accept: "image/*" %>
     </div>
     
     <div class = "d-flex justify-content-center mt-5 mb-4">
