@@ -1,5 +1,5 @@
 class User::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :redirect_to_signup_unless_logged_in, except: [:index, :show]
   
   def mypage
     @user = current_user
@@ -47,6 +47,12 @@ class User::UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:image, :name, :introduction )
+  end
+  
+  def redirect_to_signup_unless_logged_in#ログインしていなければ、mypageやeditに飛ぼうとしたら新規登録画面に遷移する
+    unless user_signed_in?
+      redirect_to new_user_registration_path
+    end
   end
   
 end

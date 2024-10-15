@@ -1,5 +1,5 @@
 class User::ReviewsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :redirect_to_signup_unless_logged_in, except: [:index, :show]
   before_action :is_matching_login_user, only: [:edit, :update]
 
   def new
@@ -52,15 +52,21 @@ class User::ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:shop, :address, :title, :body, :star, :image)
   end
-  
+
   def is_matching_login_user#レビューがログインユーザーのレビューではなかったらマイページに戻る
     review = Review.find_by(id: params[:id])
     if review.nil? || review.user != current_user
       redirect_to mypage_path, alert: "権限がありません"
     end
   end
-    
   
+  def redirect_to_signup_unless_logged_in#ログインしていなければ、reviewしようとしたら新規登録画面に遷移する
+    unless user_signed_in?
+      redirect_to new_user_registration_path
+    end
+  end
+
+
 
 end
 
