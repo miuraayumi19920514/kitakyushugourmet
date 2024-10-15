@@ -1,5 +1,6 @@
 class User::ReviewsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def new
     @review = Review.new
@@ -51,5 +52,16 @@ class User::ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:shop, :address, :title, :body, :star, :image)
   end
+  
+  def is_matching_login_user#レビューがログインユーザーのレビューではなかったらマイページに戻る
+    review = Review.find_by(id: params[:id])
+    if review.nil? || review.user != current_user
+      redirect_to mypage_path, alert: "権限がありません"
+    end
+  end
+    
+  
 
 end
+
+
