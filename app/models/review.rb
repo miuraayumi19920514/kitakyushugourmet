@@ -3,9 +3,9 @@ class Review < ApplicationRecord
   has_many :comments ,dependent: :destroy
   has_many :favorites ,dependent: :destroy
 
-  validates :shop,  presence: true
-  validates :address,  presence: true
-  validates :title,  presence: true, length: { in: 5..30 }
+  validates :shop,  presence: true, length: { in: 1..20 }
+  validates :address,  presence: true, length: { in: 10..50 }
+  validates :title,  presence: true, length: { in: 5..20 }
   validates :body,  presence: true, length: { in: 2..400 }
   validates :star,  presence: true
 

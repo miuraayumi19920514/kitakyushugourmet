@@ -4,12 +4,12 @@ ja:
       local_person:
         local: "地元民"
         traveler: "旅行者"
-        
+
   errors:
     messages:
       not_saved: "エラーが発生したため、保存されませんでした。"
-    
-    
+
+
   activerecord:
     errors:
       messages:
@@ -27,7 +27,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -53,7 +53,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月

@@ -1,6 +1,6 @@
 <div>
   <%= form_with model: [review, comment], local: false do |f| %>
-    <%= f.text_area :comment, :placeholder => "コメントを投稿できます。※50文字まで", class: "w-100" %><br>
+    <%= f.text_area :comment, :placeholder => "コメントを投稿できます。※2～50字以内", class: "w-100" %><br>
     <%= f.submit "送信" %>
   <% end %>
 </div>

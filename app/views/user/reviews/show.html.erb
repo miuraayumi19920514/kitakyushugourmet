@@ -53,6 +53,9 @@
     </div>
   </div>
   
+  
+    <%= render "user/shared/error_messages", resource: @comment %>
+  
     <div id = "comment_textarea" class = "mt-5" >
       <%= render "user/comments/form", review: @review, comment: @comment %>
     </div>
