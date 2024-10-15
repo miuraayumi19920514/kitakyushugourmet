@@ -3,18 +3,19 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   enum local_person: { traveler: 0 ,local: 1}
-  
+
   has_many :reviews ,dependent: :destroy
   has_many :comments ,dependent: :destroy
   has_many :favorites ,dependent: :destroy
-  
+
   validates :email, presence: true
   validates :encrypted_password, presence: true, length: { minimum: 6 }, on: :create
-  validates :name,  presence: true, length: { in: 2..20 }, uniqueness: true
+  validates :name,  presence: true, length: { in: 2..10 }, uniqueness: true
+  validates :introduction, length: { maximum: 50 }
   validates :local_person, presence: true
-  
+
   has_one_attached :image
   def get_image(width, height)
     unless image.attached?
@@ -23,6 +24,6 @@ class User < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
 end
 

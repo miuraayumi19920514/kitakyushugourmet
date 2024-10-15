@@ -4,26 +4,28 @@
     <h2>レビュー編集</h2>
   </div>
   
+  <%= render "user/shared/error_messages", resource: @review %>
+  
   <%= form_with model: @review, url: review_path(@review), method: :patch do |f| %>
   
     <div class = "mt-4">
       <%= f.label :shop , "お店の名前" %>
-      <%= f.text_field :shop, class: "form-control", required: true %>
+      <%= f.text_field :shop, :placeholder => "※1～20字以内", class: "form-control", required: true %>
     </div>
     
     <div class = "mt-4">
       <%= f.label :address , "お店の住所" %>
-      <%= f.text_field :address, class: "form-control", required: true %>
+      <%= f.text_field :address, :placeholder => "※10～50字以内", class: "form-control", required: true %>
     </div>
     
     <div class = "mt-4">
       <%= f.label :title , "タイトル" %>
-      <%= f.text_field :title, class: "form-control", required: true %>
+      <%= f.text_field :title, :placeholder => "※5～20字以内", class: "form-control", required: true %>
     </div>
     
     <div class = "mt-4">
       <%= f.label :body , "本文" %>
-      <%= f.text_field :body, class: "form-control", required: true %>
+      <%= f.text_field :body, :placeholder => "※2～400字以内", class: "form-control", required: true %>
     </div>
     
     <div class="form-group position-static mt-4">

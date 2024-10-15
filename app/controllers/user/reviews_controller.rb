@@ -10,7 +10,6 @@ class User::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     if @review.save
-      flash[:notice]="レビュー投稿しました"
       redirect_to mypage_path
     else
       render :new
@@ -34,10 +33,9 @@ class User::ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      flash[:notice] = "編集しました。"
       redirect_to review_path(@review)
     else
-      render:@review
+      render :edit
     end
   end
 
@@ -56,7 +54,7 @@ class User::ReviewsController < ApplicationController
   def is_matching_login_user#レビューがログインユーザーのレビューではなかったらマイページに戻る
     review = Review.find_by(id: params[:id])
     if review.nil? || review.user != current_user
-      redirect_to mypage_path, alert: "権限がありません"
+      redirect_to mypage_path
     end
   end
   

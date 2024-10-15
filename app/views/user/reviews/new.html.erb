@@ -4,11 +4,7 @@
     <h3>レビューを投稿しよう！</h3>
   </div> 
   
-      <ul>
-        <% @review.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= render "user/shared/error_messages", resource: @review %>
     
     <%= form_with model: @review, url: '/reviews', method: :post do |f| %>
         
@@ -29,22 +25,22 @@
         
         <div class = "mt-4">
           <%= f.label :shop , "お店の名前" %>
-          <%= f.text_field :shop, class: "form-control", required: true %>
+          <%= f.text_field :shop, :placeholder => "※1～20字以内", class: "form-control", required: true %>
         </div>
         
         <div class = "mt-4">
           <%= f.label :address , "お店の住所" %>
-          <%= f.text_field :address, class: "form-control", required: true %>
+          <%= f.text_field :address, :placeholder => "※10～50字以内", class: "form-control", required: true %>
         </div>
         
         <div class = "mt-4">
           <%= f.label :title , "タイトル" %>
-          <%= f.text_field :title, class: "form-control", required: true %>
+          <%= f.text_field :title, :placeholder => "※5～20字以内", class: "form-control", required: true %>
         </div>
         
         <div class = "mt-4">
           <%= f.label :body , "本文" %>
-          <%= f.text_area :body, class: "form-control", required: true %>
+          <%= f.text_area :body, :placeholder => "※2～400字以内", class: "form-control", required: true %>
         </div>
       
         <div>
