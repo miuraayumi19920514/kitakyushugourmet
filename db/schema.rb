@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2024_10_07_061053) do
     t.integer "user_id", null: false
     t.string "shop", null: false
     t.string "address", null: false
+    t.string "genre", null: false
     t.string "title", null: false
     t.text "body", null: false
     t.integer "star", null: false

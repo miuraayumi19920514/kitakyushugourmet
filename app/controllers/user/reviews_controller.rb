@@ -48,7 +48,7 @@ class User::ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:shop, :address, :title, :body, :star, :image)
+    params.require(:review).permit(:shop, :address, :genre, :title, :body, :star, :image)
   end
 
   def is_matching_login_user#レビューがログインユーザーのレビューではなかったらマイページに戻る
@@ -57,7 +57,7 @@ class User::ReviewsController < ApplicationController
       redirect_to mypage_path
     end
   end
-  
+
   def redirect_to_signup_unless_logged_in#ログインしていなければ、reviewしようとしたら新規登録画面に遷移する
     unless user_signed_in?
       redirect_to new_user_registration_path

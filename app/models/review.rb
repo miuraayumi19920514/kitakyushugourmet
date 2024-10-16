@@ -3,11 +3,12 @@ class Review < ApplicationRecord
   has_many :comments ,dependent: :destroy
   has_many :favorites ,dependent: :destroy
 
-  validates :shop,  presence: true, length: { in: 1..20 }
-  validates :address,  presence: true, length: { in: 10..50 }
-  validates :title,  presence: true, length: { in: 5..20 }
-  validates :body,  presence: true, length: { in: 2..400 }
-  validates :star,  presence: true
+  validates :shop, presence: true, length: { in: 1..20 }
+  validates :address, presence: true, length: { in: 10..50 }
+  validates :genre, presence: true, length: { in: 2..10 } 
+  validates :title, presence: true, length: { in: 5..20 }
+  validates :body, presence: true, length: { in: 2..400 }
+  validates :star, presence: true
 
   has_one_attached :image
   def get_image(width, height)

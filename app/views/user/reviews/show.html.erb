@@ -4,7 +4,7 @@
     <div class = "mt-4">
       <h2><%= @review.shop %></h2>
     </div>
-    <div class = "pl-4">
+    <div class = "ml-4 mb-5">
       <%= @review.address %>
     </div>
     
@@ -12,8 +12,13 @@
       <%= render "user/favorites/favorite", review: @review %>
     </div>
     
-    <div class = "mt-4">
-      投稿：<%= I18n.t("enums.user.local_person.#{@review.user.local_person}") %>
+    <div class = "mt-4" style="display: flex;">
+      投稿：
+            <% if @review.user.local_person == "local" %>
+              <h6 class="person_local"><%= I18n.t("enums.user.local_person.#{@review.user.local_person}") %></h6>
+            <% else %>
+              <h6 class="person_traveler"><%= I18n.t("enums.user.local_person.#{@review.user.local_person}") %></h6>
+            <% end %>
     </div>
   
     <div style="display: flex;">
