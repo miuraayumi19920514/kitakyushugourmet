@@ -46,6 +46,7 @@
           <thead style="background-color: #ffe6ee;">
             <tr>
               <th class = "text-center">店名</th>
+              <th class = "text-center">ジャンル</th>
               <th class = "text-center">タイトル</th>
               <th class = "text-center">コメント数</th>
               <th class = "text-center">いいね</th>
@@ -55,6 +56,7 @@
             <% @reviews.each do |review| %>
               <tr>
                 <td class = "text-center"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+                <td class = "text-center"><%= review.genre %></td>
                 <td class = "text-center"><%= review.title %></td>
                 <td class = "text-center" id = "comment_count">
                   <%= render "user/comments/count", review: review %>

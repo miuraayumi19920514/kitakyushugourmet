@@ -7,7 +7,7 @@
   <table class="table border">
     <thead style="background-color: #ffe6ee;">
       <tr>
-        <th class = "poster">投稿者</th>
+        <th class = "poster"></th>
         <th class = "text-center">ユーザー名</th>
         <th class = "text-center">レビュー数</th>
       </tr>
@@ -15,7 +15,13 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td class="poster"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></td>
+          <td class="poster">
+            <% if user.local_person == "local" %>
+              <h4 class="person_local"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></h4>
+            <% else %>
+              <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></h4>
+            <% end %>
+          </td>
           <td class = "text-center"><h4><%=link_to user.name , user_path(user) %></h4></td>
           <td class = "text-center"><%= user.reviews.count %></td>
         </tr>

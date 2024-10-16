@@ -1,4 +1,11 @@
-<div id="show_star-<%= review.id %>"></div>
+<!--星と数字のレイアウト-->
+<div class="position-relative d-inline-block">
+  <!-- 星評価を表示するエリア -->
+  <div id="show_star-<%= review.id %>"></div>
+  <!-- 星の数を表示するエリア -->
+  <div class="star-count" id="star-count-<%= review.id %>"><%= review.star %></div>
+</div>
+
 <script>
     var elem = document.querySelector('#show_star-<%= review.id %>');
     var opt = {
@@ -7,5 +14,5 @@
         readOnly: true,
         score: <%= review.star %>
     };
-    raty(elem,opt);
+    raty(elem, opt);
 </script>
