@@ -1,0 +1,92 @@
+<div class = "container col-8 my-5">
+
+  <div>
+  <h2>検索結果</h2>
+    <div class="mt-2 ml-4">
+      検索ワード
+      <% if "#{@word}".present? %>
+        <div class="alert alert-primary p-1 d-inline-block" role="alert" style="font-size: 0.8rem; width: auto;">
+          <%= "#{@word}" %>
+        </div>
+      <% else %>
+        <div class="alert alert-primary p-1 d-inline-block" role="alert" style="font-size: 0.8rem; width: auto;">
+          なし
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class = " mt-4 mb-1">
+    <% if (@range == "レビュー" && @reviews.present?) %>
+      <p><%= @reviews.count %>件のレビューが見つかりました。</p>
+    <% elsif (@range == "ユーザー" && @users.present?) %>
+      <p><%= @users.count %>件のユーザーが見つかりました。</p>
+    <% else %>
+      <h4 class="text-danger text-center mt-5">ヒットしませんでした。</h4>
+    <% end %>
+  </div>
+
+    <!--<table class="table table-hover table-inverse">-->
+    <% unless (@range == "レビュー" && @reviews.blank?) || (@range == "ユーザー" && @users.blank?) %>
+      <table class="table border">
+        <% if @range == "レビュー" %>
+          <thead style="background-color: #ffe6ee;">
+            <tr>
+              <th class="poster">投稿者</th>
+              <th class = "text-center">店名</th>
+              <th class = "text-center">ジャンル</th>
+              <th class = "text-center">タイトル</th>
+              <th class = "text-center">コメント数</th>
+              <th class = "text-center">いいね</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reviews.each do |review| %>
+              <tr>
+                <td class="poster">
+                  <% if review.user.local_person == "local" %>
+                    <h4 class="person_local"><%= I18n.t("enums.user.local_person.#{review.user.local_person}") %></h4>
+                  <% else %>
+                    <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{review.user.local_person}") %></h4>
+                  <% end %>
+                </td>
+                <td class = "text-center"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+                <td class = "text-center"><%= review.genre %></td>
+                <td class = "text-center"><%= review.title %></td>
+                <td class = "text-center" id = "comment_count">
+                  <%= render "user/comments/count", review: review %>
+                </td>
+                <td class = "text-center" id = "favorite_buttons_<%= review.id %>">
+                  <%= render "user/favorites/favorite", review: review %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% elsif @range == 'ユーザー' %>
+          <thead style="background-color: #a1e6e6;">
+            <tr>
+              <th class = "poster"></th>
+              <th class = "text-center">ユーザー名</th>
+              <th class = "text-center">レビュー数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td class="poster">
+                  <% if user.local_person == "local" %>
+                    <h4 class="person_local"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></h4>
+                  <% else %>
+                    <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></h4>
+                  <% end %>
+                </td>
+                <td class = "text-center"><h4><%=link_to user.name , user_path(user) %></h4></td>
+                <td class = "text-center"><%= user.reviews.count %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </table>
+    <% end %>
+</div>

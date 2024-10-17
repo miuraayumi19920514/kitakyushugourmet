@@ -3,7 +3,7 @@ class User::UsersController < ApplicationController
   
   def mypage
     @user = current_user
-    @reviews = @user.reviews
+    @reviews = @user.reviews.order(created_at: :desc)
   end
 
   def index
@@ -12,7 +12,7 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = @user.reviews
+    @reviews = @user.reviews.order(created_at: :desc)
   end
   
   def edit
@@ -22,7 +22,7 @@ class User::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to mypage_path
+      redirect_to mypage_path(@user)
     else
       render :edit
     end
