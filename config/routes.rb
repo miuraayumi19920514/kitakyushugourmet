@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   scope module: :user do
     root to: 'homes#top'
     get '/about' => 'homes#about', as: 'about'
+    get '/search' => "searches#search", as: 'search'
     
     get '/users/mypage' =>'users#mypage', as: 'mypage'
     get '/users/infomation/edit' => 'users#edit', as: 'information_edit'

@@ -17,7 +17,7 @@ class User::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all.includes(:user)
+    @reviews = Review.all.includes(:user).order(created_at: :desc)
   end
 
   def show

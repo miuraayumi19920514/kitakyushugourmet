@@ -1,101 +1,113 @@
-<header>
+<header class = "border" style = "background-color: #ffffe6;">
 
   <nav>
     <% if user_signed_in? %>
-    <div class = "text-center mt-3 mb-2">
-      <%= link_to reviews_path , class:"nav-link" do %>
-        <%= image_tag 'kita.png' , size: "190x80" , class:"kita"%>
-      <% end %>
-    </div>
+      <div class = "text-center mt-2 mb-1">
+        <%= link_to reviews_path do %>
+          <%= image_tag 'kita.png' , size: "150x60" , class:"kita"%>
+        <% end %>
+      </div>
 
-    <div class="d-flex justify-content-center ">
-      <ul class="navbar-nav" style="flex-direction: row;">
-        <li>
-          <%= link_to mypage_path(current_user.id) , class:"nav-link text-light" do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">マイページ</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_review_path , class:"nav-link text-light" do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">投稿</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to reviews_path , class:"nav-link text-light" do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">みんなのレビュー</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to users_path , class:"nav-link text-light" do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">全てのユーザー</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to destroy_user_session_path, method: :delete, class:"nav-link text-light" do%>
-            <button type="button" class="btn btn-outline-secondary" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">ログアウト</button>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+      <div class="d-flex justify-content-center">
+        <ul class="navbar-nav" style="flex-direction: row;">
+          <li>
+            <%= link_to mypage_path(current_user.id) , class:"nav-link text-light" do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">マイページ</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_review_path , class:"nav-link text-light" do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">投稿</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to reviews_path , class:"nav-link text-light" do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">みんなのレビュー</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to users_path , class:"nav-link text-light" do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">全てのユーザー</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete, class:"nav-link text-light" do%>
+              <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">ログアウト</button>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="d-flex justify-content-center mt-3 mb-2" style="margin-left: 580px;">
+        <%= render "user/searches/search_form" %>
+      </div>
 
     <% elsif admin_signed_in? %>
-    <div class = "text-center mt-3 mb-2">
-      <%= link_to root_path , class:"nav-link" do %>
-        <%= image_tag 'kita.png' , size: "190x80" , class:"kita"%>
-      <% end %>
-    </div>
+      <div class = "text-center mt-2 mb-1">
+        <%= link_to root_path do %>
+          <%= image_tag 'kita.png' , size: "150x60" , class:"kita"%>
+        <% end %>
+      </div>
 
-    <div class="d-flex justify-content-center ">
-      <ul class="navbar-nav" style="flex-direction: row;">
-        <li>
-          <%= link_to admin_users_path , class:"nav-link text-light" do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">会員一覧</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to admin_reviews_path , class:"nav-link text-light" do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">レビュー一覧</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link text-light" do%>
-            <button type="button" class="btn btn-outline-secondary" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">ログアウト</button>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+      <div class="d-flex justify-content-center ">
+        <ul class="navbar-nav" style="flex-direction: row;">
+          <li>
+            <%= link_to admin_users_path , class:"nav-link text-light" do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">会員一覧</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to admin_reviews_path , class:"nav-link text-light" do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">レビュー一覧</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link text-light" do%>
+              <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">ログアウト</button>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="d-flex justify-content-center mt-3 mb-2" style="margin-left: 450px;">
+        <%= render "user/searches/search_form" %>
+      </div>
 
     <% else %>
-    <div class = "text-center mt-3 mb-2">
-      <%= link_to root_path , class:"nav-link" do %>
-        <%= image_tag 'kita.png' , size: "190x80" , class:"kita"%>
-      <% end %>
-    </div>
+      <div class = "text-center mt-2 mb-1">
+        <%= link_to root_path do %>
+          <%= image_tag 'kita.png' , size: "150x60" , class:"kita"%>
+        <% end %>
+      </div>
 
-    <div class="d-flex justify-content-center ">
-      <ul class="navbar-nav" style="flex-direction: row;">
-        <li>
-          <%= link_to about_path  , class:"nav-link text-light" do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">About</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to  reviews_path , class:"nav-link text-light"  do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">みんなのレビュー</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to new_user_registration_path , class:"nav-link text-light"  do %>
-            <button type="button" class="btn btn-outline-secondary mr-5" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">新規登録</button>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to  new_user_session_path , class:"nav-link text-light"  do %>
-            <button type="button" class="btn btn-outline-secondary" style="color: black; font-weight: 400; border-color: #d3d3d3; width: 150px;">ログイン</button>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+      <div class="d-flex justify-content-center ">
+        <ul class="navbar-nav" style="flex-direction: row;">
+          <li>
+            <%= link_to about_path  , class:"nav-link text-light" do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">About</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to  reviews_path , class:"nav-link text-light"  do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">みんなのレビュー</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path , class:"nav-link text-light"  do %>
+              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">新規登録</button>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to  new_user_session_path , class:"nav-link text-light"  do %>
+              <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 150px;">ログイン</button>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="d-flex justify-content-center mt-3 mb-2" style="margin-left: 365px;">
+        <%= render "user/searches/search_form" %>
+      </div>
     <% end %>
   </nav>
 </header>

@@ -1,4 +1,4 @@
-<div class="container border col-5 mt-5 mb-5">
+<div class="container border col-6 mt-5 mb-5">
   <%= form_with model: User.new, url: user_registration_path do |f| %>
 
   <div class = "mt-4">
@@ -6,13 +6,13 @@
   </div>
 
   <div class= "text-center mt-5 mb-4">
-    <div class="border col-7 mx-auto" style="background-color: #ffe6ee;">
+    <div class="border col-9 mx-auto" style="background-color: #ffe6ee;">
       アカウントを作成すると<br>
-      レビューの投稿・いいね・コメント・Myページ<br>
+      <strong>投稿・いいね・コメント・Myページ・検索機能</strong><br>
       が使えるようになります。
     </div>
   </div>
-  
+
   <% if flash[:alert] %>
     <div class="alert mb-3" style="background-color: #ffd4d1; color: #930403; border: solid 1px #930403;">
       <%= flash[:alert] %>
