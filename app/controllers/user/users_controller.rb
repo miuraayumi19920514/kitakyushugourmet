@@ -3,16 +3,32 @@ class User::UsersController < ApplicationController
   
   def mypage
     @user = current_user
-    @reviews = @user.reviews.order(created_at: :desc)
+    if params[:latest]
+      @reviews = @user.reviews.latest
+    elsif params[:old]
+      @reviews = @user.reviews.old
+    elsif params[:favorite_count]
+      @reviews = @user.reviews.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+    else
+      @reviews = @user.reviews.order(created_at: :desc)
+    end
   end
 
   def index
-    @users = User.all#退会した人を非表示にするにはここに何かを書く
+    @users = User.where(is_active: true).all#退会した人を非表示にしている
   end
 
   def show
     @user = User.find(params[:id])
-    @reviews = @user.reviews.order(created_at: :desc)
+    if params[:latest]
+      @reviews = @user.reviews.latest
+    elsif params[:old]
+      @reviews = @user.reviews.old
+    elsif params[:favorite_count]
+      @reviews = @user.reviews.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+    else
+      @reviews = @user.reviews.order(created_at: :desc)
+    end
   end
   
   def edit

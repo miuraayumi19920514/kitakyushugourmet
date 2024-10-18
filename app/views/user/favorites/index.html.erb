@@ -8,10 +8,15 @@
       <h2><%= @user.name %>さんのいいね一覧</h2>
     </div>
   <% end %>
-  
+
   <% if @favorites.empty? %>
     まだ、いいねしてません。
   <% else %>
+    <div class="d-flex justify-content-end">
+      <%= link_to '新しい順', user_favorites_path(@user, latest: true) %>
+      | <%= link_to '古い順', user_favorites_path(@user, old: true) %>
+      | <%= link_to '人気順', user_favorites_path(@user, favorite_count: true) %>
+    </div>
     <table class="table border">
       <thead style="background-color: #ffe6ee;">
         <tr>

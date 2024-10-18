@@ -5,10 +5,14 @@ class Review < ApplicationRecord
 
   validates :shop, presence: true, length: { in: 1..20 }
   validates :address, presence: true, length: { in: 10..50 }
-  validates :genre, presence: true, length: { in: 2..10 } 
+  validates :genre, presence: true, length: { in: 2..10 }
   validates :title, presence: true, length: { in: 5..20 }
   validates :body, presence: true, length: { in: 2..400 }
   validates :star, presence: true
+
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  
 
   has_one_attached :image
   def get_image(width, height)

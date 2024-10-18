@@ -3,11 +3,17 @@
   <div class = "mb-4">
     <h2>みんなのレビュー</h2>
   </div>
-
+  <div class = "d-flex justify-content-end">
+    <%= link_to '新しい順', reviews_path(latest: "true") %>
+    |<%= link_to '古い順', reviews_path(old: "true") %>
+    |<%= link_to '人気順', reviews_path(favorite_count: "true") %>
+  </div>
   <table class="table border">
     <thead style="background-color: #ffe6ee;">
       <tr>
-        <th class="poster">投稿者</th>
+        <th class="poster1">
+          <%= select_tag 'review_filter', options_for_select([t('enums.user.local_person.選択なし'), t('enums.user.local_person.local'), t('enums.user.local_person.traveler')]), id: 'review_filter' %>
+        </th>
         <th class = "text-center">店名</th>
         <th class = "text-center">ジャンル</th>
         <th class = "text-center">タイトル</th>
@@ -34,6 +40,7 @@
           <td class = "text-center" id = "favorite_buttons_<%= review.id %>">
             <%= render "user/favorites/favorite", review: review %>
           </td>
+
         </tr>
       <% end %>
     </tbody>

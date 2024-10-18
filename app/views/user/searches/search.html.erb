@@ -29,11 +29,18 @@
 
     <!--<table class="table table-hover table-inverse">-->
     <% unless (@range == "レビュー" && @reviews.blank?) || (@range == "ユーザー" && @users.blank?) %>
-      <table class="table border">
-        <% if @range == "レビュー" %>
+      <% if @range == "レビュー" %>
+        <table class="table border">
+          <div class = "d-flex justify-content-end">
+            <%= link_to '新しい順', search_path(latest: "true") %>
+            |<%= link_to '古い順', search_path(old: "true") %>
+            |<%= link_to '人気順', search_path(favorite_count: "true") %>
+          </div>
           <thead style="background-color: #ffe6ee;">
             <tr>
-              <th class="poster">投稿者</th>
+              <th class="poster1">
+                <%= select_tag 'review_filter', options_for_select([t('enums.user.local_person.選択なし'), t('enums.user.local_person.local'), t('enums.user.local_person.traveler')]), id: 'review_filter' %>
+              </th>
               <th class = "text-center">店名</th>
               <th class = "text-center">ジャンル</th>
               <th class = "text-center">タイトル</th>
@@ -63,10 +70,14 @@
               </tr>
             <% end %>
           </tbody>
-        <% elsif @range == 'ユーザー' %>
+        </table>
+      <% elsif @range == 'ユーザー' %>
+        <table class="table border">
           <thead style="background-color: #a1e6e6;">
             <tr>
-              <th class = "poster"></th>
+              <th class = "poster1">
+                <%= select_tag 'review_filter', options_for_select([t('enums.user.local_person.選択なし'), t('enums.user.local_person.local'), t('enums.user.local_person.traveler')]), id: 'review_filter' %>
+              </th>
               <th class = "text-center">ユーザー名</th>
               <th class = "text-center">レビュー数</th>
             </tr>
@@ -86,7 +97,7 @@
               </tr>
             <% end %>
           </tbody>
-        <% end %>
-      </table>
+        </table>
+      <% end %>
     <% end %>
 </div>

@@ -22,7 +22,7 @@
   <%= render "user/shared/error_messages", resource: resource %>
 
   <div class = "mt-5 row justify-content-center">
-    <div class="col-4">
+    <div>
       <%= f.label :name, "★表示名" %><br>
       <%= f.text_field :name, :placeholder => "※2～10字以内" %>
     </div>
@@ -31,7 +31,7 @@
 
 
   <div class = "mt-4 row justify-content-center">
-    <div class="col-4">
+    <div>
       <%= f.label :email, "★メールアドレス" %><br>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
@@ -39,21 +39,21 @@
 
 
   <div class = "mt-4 row justify-content-center">
-    <div class="col-4">
+    <div>
       <%= f.label :password,"★パスワード" %><br>
       <%= f.password_field :password, :placeholder => "※6字以上", autocomplete: "new-password" %>
     </div>
   </div>
 
   <div class = "mt-4 row justify-content-center">
-    <div class="col-4">
+    <div>
       <%= f.label :password_confirmation, "★パスワード" %><br>
       <%= f.password_field :password_confirmation, :placeholder => "※確認用", autocomplete: "new-password" %>
     </div>
   </div>
 
   <div class = "mt-4 row justify-content-center">
-    <div class="col-4">
+    <div>
     <%= f.label :local_person, "★北九州の人ですか？"%><br>
       <div class="form-check">
         <%= f.radio_button :local_person, :local, id: "local_person", class: "form-check-input" %>
@@ -63,6 +63,7 @@
         <%= f.radio_button :local_person, :traveler, id: "local_person", class: "form-check-input" %>
         <%= f.label :local_person, "no", class: "form-check-label" %>
       </div>
+      ※一度登録すると変更できません
     </div>
   </div>
 

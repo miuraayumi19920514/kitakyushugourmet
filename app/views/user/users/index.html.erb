@@ -1,13 +1,15 @@
 <div class = "container col-8 my-5">
 
-  <div class = "mb-4">
+  <div class = "mb-5">
     <h2>全てのユーザー</h2>
   </div>
 
   <table class="table border">
     <thead style="background-color: #a1e6e6;">
       <tr>
-        <th class = "poster"></th>
+        <th class = "poster1">
+          <%= select_tag 'review_filter', options_for_select([t('enums.user.local_person.選択なし'), t('enums.user.local_person.local'), t('enums.user.local_person.traveler')]), id: 'review_filter' %>
+        </th>
         <th class = "text-center">ユーザー名</th>
         <th class = "text-center">レビュー数</th>
       </tr>
