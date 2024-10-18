@@ -1,5 +1,5 @@
 class User::UsersController < ApplicationController
-  before_action :redirect_to_signup_unless_logged_in, except: [:index, :show]
+  before_action :redirect_to_signup_unless_logged_in, except: [:index, :show, :completion]
   
   def mypage
     @user = current_user
@@ -56,7 +56,6 @@ class User::UsersController < ApplicationController
   end
   
   def completion
-    
   end
   
   private
