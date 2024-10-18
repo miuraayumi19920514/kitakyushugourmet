@@ -17,7 +17,15 @@ class User::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all.includes(:user).order(created_at: :desc)
+    if params[:latest]
+      @reviews = Review.latest
+    elsif params[:old]
+      @reviews = Review.old
+    elsif params[:favorite_count]
+      @reviews = Review.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+    else
+      @reviews = Review.all.includes(:user).where(users: { is_active: true }).order(created_at: :desc)#退会した人のレビューを非表示にしている
+    end
   end
 
   def show

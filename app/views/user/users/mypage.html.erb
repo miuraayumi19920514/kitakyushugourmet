@@ -3,13 +3,13 @@
     <h2>マイページ</h2>
 
       <div class = "container">
-        
+
         <% if @user.local_person == "local" %>
           <h4 class="person_local mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
         <% else %>
           <h4 class="person_traveler mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
         <% end %>
-        
+
         <div class = "row">
           <div class = "col-5 d-flex flex-column mt-2">
             <%= image_tag @user.get_image(300,300) %>
@@ -43,6 +43,11 @@
     <% if @reviews.empty? %>
       投稿はまだありません
     <% else %>
+      <div class = "d-flex justify-content-end">
+        <%= link_to '新しい順', mypage_path(latest: "true") %>
+        |<%= link_to '古い順', mypage_path(old: "true") %>
+        |<%= link_to '人気順', mypage_path(favorite_count: "true") %>
+      </div>
       <table class="table border">
         <thead style="background-color: #ffe6ee;">
           <tr>

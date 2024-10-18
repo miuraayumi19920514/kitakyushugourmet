@@ -2,8 +2,17 @@ class User::FavoritesController < ApplicationController
   before_action :redirect_to_signup_unless_logged_in
   
   def index
-    @favorites = Favorite.where(user: params[:user_id]).order(created_at: :desc) # 特定のユーザーのいいね一覧を取得
-    @user = User.find(params[:user_id]) # userを特定するための変数
+    @user = User.find(params[:user_id])
+    @favorites = @user.favorites.includes(:review)
+    if params[:latest]
+      @reviews = @favorites.map(&:review).sort_by(&:created_at).reverse
+    elsif params[:old]
+      @reviews = @favorites.map(&:review).sort_by(&:created_at)
+    elsif params[:favorite_count]
+      @reviews = @favorites.map(&:review).sort_by {|review| -review.favorites.size }
+    else
+      @reviews = @favorites.map(&:review).sort_by(&:created_at).reverse
+    end
   end
   
   def create
