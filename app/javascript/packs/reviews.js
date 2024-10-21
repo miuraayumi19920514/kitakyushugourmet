@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbolinks:load', function() {
   var reviewFilter = document.getElementById('review_filter');
   if (reviewFilter != null){
   reviewFilter.addEventListener('change', function() {
