@@ -17,7 +17,7 @@
       | <%= link_to '古い順', user_favorites_path(@user, old: true) %>
       | <%= link_to '人気順', user_favorites_path(@user, favorite_count: true) %>
     </div>
-    <table class="table border">
+    <table class="table border table-hover">
       <thead style="background-color: #ffe6ee;">
         <tr>
           <th class="poster">投稿者</th>
@@ -28,26 +28,29 @@
         </tr>
       </thead>
       <tbody>
-        <% @favorites.each do |favorite| %>
+        <% @reviews.each do |review| %>
           <tr>
             <td class="poster">
-              <% if favorite.review.user.local_person == "local" %>
-                <h4 class="person_local"><%= I18n.t("enums.user.local_person.#{favorite.review.user.local_person}") %></h4>
+              <% if review.user.local_person == "local" %>
+                <h4 class="person_local"><%= I18n.t("enums.user.local_person.#{review.user.local_person}") %></h4>
               <% else %>
-                <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{favorite.review.user.local_person}") %></h4>
+                <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{review.user.local_person}") %></h4>
               <% end %>
             </td>
-            <td class = "text-center"><h4><%= link_to favorite.review.shop , review_path(favorite.review) %></h4></td>
-            <td class = "text-center"><%= favorite.review.title %></td>
+            <td class = "text-center"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+            <td class = "text-center"><%= review.title %></td>
             <td class = "text-center" id = "comment_count">
-              <%= render "user/comments/count", review: favorite.review %>
+              <%= render "user/comments/count", review: review %>
             </td>
-            <td class = "text-center" id="favorite_buttons_<%= favorite.review.id %>">
-              <%= render "user/favorites/favorite", review: favorite.review %>
+            <td class = "text-center" id="favorite_buttons_<%= review.id %>">
+              <%= render "user/favorites/favorite", review: review %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <div class = "d-flex justify-content-center">
+      <%= paginate @reviews %>
+    </div>
   <% end %>
 </div>

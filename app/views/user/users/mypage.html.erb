@@ -48,7 +48,7 @@
         |<%= link_to '古い順', mypage_path(old: "true") %>
         |<%= link_to '人気順', mypage_path(favorite_count: "true") %>
       </div>
-      <table class="table border">
+      <table class="table border table-hover">
         <thead style="background-color: #ffe6ee;">
           <tr>
             <th class = "text-center">店名</th>
@@ -76,6 +76,9 @@
           <% end %>
         </tbody>
       </table>
+      <div class = "d-flex justify-content-center">
+        <%= paginate @reviews %>
+      </div>
     <% end %>
   </div>
   <h4 class = "text-center mt-5"><%= link_to "退会する" , unsubscribe_path, class: "btn btn-danger" %></h4>

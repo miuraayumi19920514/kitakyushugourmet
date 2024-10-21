@@ -1,49 +1,73 @@
 <div class = "container col-8 my-5">
-
-  <div>
-  <h2>検索結果</h2>
-    <div class="mt-2 ml-4">
-      検索ワード
-      <% if "#{@word}".present? %>
-        <div class="alert alert-primary p-1 d-inline-block" role="alert" style="font-size: 0.8rem; width: auto;">
-          <%= "#{@word}" %>
+  
+  <div class="search_form">
+    <%= form_with url: search_path, local: true, method: :get, class: "d-flex align-items-center" do |f| %>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fas fa-search"></i>
+          </span>
         </div>
-      <% else %>
-        <div class="alert alert-primary p-1 d-inline-block" role="alert" style="font-size: 0.8rem; width: auto;">
-          なし
+        <%= f.text_field :word, placeholder: "キーワード検索", class: "form-control" %>
+        <div class="input-group-append">
+          <%= f.select :range, options_for_select([['レビュー'], ['ユーザー']]), {}, class: "custom-select" %>
+          <%= f.submit "検索", class: "btn btn-primary" %>
         </div>
-      <% end %>
-    </div>
-  </div>
-
-
-  <div class = " mt-4 mb-1">
-    <% if (@range == "レビュー" && @reviews.present?) %>
-      <p><%= @reviews.count %>件のレビューが見つかりました。</p>
-    <% elsif (@range == "ユーザー" && @users.present?) %>
-      <p><%= @users.count %>件のユーザーが見つかりました。</p>
-    <% else %>
-      <h4 class="text-danger text-center mt-5">ヒットしませんでした。</h4>
-      <div class = "d-flex justify-content-center mt-5">
-        <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
-        <!--元のページのソート機能を保持したまま戻ることができる-->
       </div>
     <% end %>
   </div>
 
-    <!--<table class="table table-hover table-inverse">-->
+  <% if @reviews.present? || @users.present? %>
+    <div class = "mt-5">
+    <h2>検索結果</h2>
+      <div class="mt-2 ml-4">
+        検索ワード
+        <% if "#{@word}".present? %>
+          <div class="alert alert-primary p-1 d-inline-block" role="alert" style="font-size: 0.8rem; width: auto;">
+            <%= "#{@word}" %>
+          </div>
+        <% else %>
+          <div class="alert alert-primary p-1 d-inline-block" role="alert" style="font-size: 0.8rem; width: auto;">
+            なし
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <div class = " mt-4 mb-1">
+      <% if (@range == "レビュー" && @reviews.present?) %>
+        <p><%= @reviews.total_count %>件のレビューが見つかりました。</p>
+      <% elsif (@range == "ユーザー" && @users.present?) %>
+        <p><%= @users.total_count %>件のユーザーが見つかりました。</p>
+      <% else %>
+        <h4 class="text-danger text-center mt-5">ヒットしませんでした。</h4>
+        <div class = "d-flex justify-content-center mt-5">
+          <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
+          <!--元のページのソート機能を保持したまま戻ることができる-->
+        </div>
+      <% end %>
+    </div>
+
     <% unless (@range == "レビュー" && @reviews.blank?) || (@range == "ユーザー" && @users.blank?) %>
       <% if @range == "レビュー" %>
-        <table class="table border">
-          <div class = "d-flex justify-content-end">
-            <%= link_to '新しい順', search_path(latest: "true") %>
-            |<%= link_to '古い順', search_path(old: "true") %>
-            |<%= link_to '人気順', search_path(favorite_count: "true") %>
+        <table class="table border table-hover">
+          <div class="d-flex justify-content-end">
+            <%= link_to '新しい順', search_path(latest: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
+            | <%= link_to '古い順', search_path(old: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
+            | <%= link_to '人気順', search_path(favorite_count: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
           </div>
           <thead style="background-color: #ffe6ee;">
             <tr>
               <th class="poster1">
-                <%= select_tag 'review_filter', options_for_select([t('enums.user.local_person.選択なし'), t('enums.user.local_person.local'), t('enums.user.local_person.traveler')]), id: 'review_filter' %>
+                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                  <div class="form-group">
+                    <%= hidden_field_tag :word, params[:word] %>
+                    <%= hidden_field_tag :range, params[:range] %>
+                    <%= select_tag :local_person, options_for_select([['選択なし', ''], ['地元民', 'local'], ['旅行者', 'traveler']], selected: params[:local_person]), class: "form-control" %>
+                  </div>
+                  <%= submit_tag 'フィルター', class: "btn btn-primary" %>
+                <% end %>
               </th>
               <th class = "text-center">店名</th>
               <th class = "text-center">ジャンル</th>
@@ -76,14 +100,21 @@
           </tbody>
         </table>
       <% elsif @range == 'ユーザー' %>
-        <table class="table border">
+        <table class="table border table-hover">
           <thead style="background-color: #a1e6e6;">
             <tr>
-              <th class = "poster1">
-                <%= select_tag 'review_filter', options_for_select([t('enums.user.local_person.選択なし'), t('enums.user.local_person.local'), t('enums.user.local_person.traveler')]), id: 'review_filter' %>
+              <th class="poster1">
+                <%= form_with url: search_path, method: :get, local: true do %>
+                  <div class="form-group">
+                    <%= hidden_field_tag :word, params[:word] %>
+                    <%= hidden_field_tag :range, params[:range] %>
+                    <%= select_tag :local_person, options_for_select([['選択なし', ''], ['地元民', 'local'], ['旅行者', 'traveler']], selected: params[:local_person]), class: "form-control" %>
+                  </div>
+                  <%= submit_tag 'フィルター', class: "btn btn-primary" %>
+                <% end %>
               </th>
-              <th class = "text-center">ユーザー名</th>
-              <th class = "text-center">レビュー数</th>
+              <th class="text-center">ユーザー名</th>
+              <th class="text-center">レビュー数</th>
             </tr>
           </thead>
           <tbody>
@@ -96,12 +127,20 @@
                     <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></h4>
                   <% end %>
                 </td>
-                <td class = "text-center"><h4><%=link_to user.name , user_path(user) %></h4></td>
-                <td class = "text-center"><%= user.reviews.count %></td>
+                <td class="text-center"><h4><%= link_to user.name , user_path(user) %></h4></td>
+                <td class="text-center"><%= user.reviews.count %></td>
               </tr>
             <% end %>
           </tbody>
         </table>
       <% end %>
     <% end %>
+    <div class = "d-flex justify-content-center">
+      <% if @range == 'レビュー' %>
+        <%= paginate @reviews %>
+      <% elsif @range == 'ユーザー' %>
+        <%= paginate @users %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

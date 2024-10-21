@@ -38,8 +38,10 @@
         </ul>
       </div>
 
-      <div class="d-flex justify-content-center mt-3 mb-2" style="margin-left: 580px;">
-        <%= render "user/searches/search_form" %>
+      <div class="d-flex justify-content-center my-2" style="margin-left: 920px;">
+        <%= link_to search_path do %>
+          <button type="button" class="btn btn-outline-secondary" style="background-color: #b3d9ff; color: black; font-weight: 600; border-color: #475766; width: 70px;">検索</button>
+        <% end %>
       </div>
 
     <% elsif admin_signed_in? %>
@@ -69,8 +71,10 @@
         </ul>
       </div>
 
-      <div class="d-flex justify-content-center mt-3 mb-2" style="margin-left: 450px;">
-        <%= render "user/searches/search_form" %>
+      <div class="d-flex justify-content-center my-2" style="margin-left: 920px;">
+        <%= link_to search_path do %>
+          <button type="button" class="btn btn-outline-secondary" style="background-color: #b3d9ff; color: black; font-weight: 600; border-color: #475766; width: 70px;">検索</button>
+        <% end %>
       </div>
 
     <% else %>
@@ -98,16 +102,19 @@
             <% end %>
           </li>
           <li>
-            <%= link_to  new_user_session_path , class:"nav-link text-light"  do %>
+            <%= link_to new_user_session_path , class:"nav-link text-light"  do %>
               <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 150px;">ログイン</button>
             <% end %>
           </li>
         </ul>
       </div>
 
-      <div class="d-flex justify-content-center mt-3 mb-2" style="margin-left: 365px;">
-        <%= render "user/searches/search_form" %>
+      <div class="d-flex justify-content-center my-2" style="margin-left: 920px;">
+        <%= link_to search_path do %>
+          <button type="button" class="btn btn-outline-secondary" style="background-color: #b3d9ff; color: black; font-weight: 600; border-color: #475766; width: 70px;">検索</button>
+        <% end %>
       </div>
+
     <% end %>
   </nav>
 </header>
