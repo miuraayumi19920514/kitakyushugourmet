@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: 'reviews#index'
+    root to: 'users#index'
+    get '/admin/search' => "searches#search", as: 'search'
+    patch "withdrawal/:id" => "users#withdrawal", as: "withdrawal"
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :edit, :update, :destroy]
     resources :comments, only: [:destroy]
