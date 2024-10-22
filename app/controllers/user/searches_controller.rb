@@ -9,7 +9,7 @@ def search
 
   if @range == 'レビュー'
     # 検索条件を共通化
-    @reviews = Review.where('title LIKE :keyword OR genre LIKE :keyword OR body LIKE :keyword OR shop LIKE :keyword OR address LIKE :keyword', keyword: "%#{@word}%")
+    @reviews = Review.includes(:user).where(users: { is_active: true }).where('title LIKE :keyword OR genre LIKE :keyword OR body LIKE :keyword OR shop LIKE :keyword OR address LIKE :keyword', keyword: "%#{@word}%")
 
     # local_personに基づくフィルタリング
     if @local_person.present?
