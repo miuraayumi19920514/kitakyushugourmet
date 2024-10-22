@@ -19,9 +19,9 @@ class User::UsersController < ApplicationController
     @users = User.where(is_active: true).all.page(params[:page]).per(10)
     local_person = params[:local_person]
       if local_person == 'local'
-        @users = User.where(local_person: 1).page(params[:page]).per(10)
+        @users = User.where(local_person:1, is_active: true).page(params[:page]).per(10)
       elsif local_person == 'traveler'
-        @users = User.where(local_person: 0).page(params[:page]).per(10)
+        @users = User.where(local_person:0, is_active: true).page(params[:page]).per(10)
       else
         @users = User.where(is_active: true).all.page(params[:page]).per(10)
         #退会した人を非表示にしている
