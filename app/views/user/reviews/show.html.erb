@@ -28,7 +28,7 @@
 
     <div class = "mt-1" style="display: flex;">
       初見の入りやすさ度：
-      <%= render "output_star", review: @review %>
+      <%= render "user/reviews/output_star", review: @review %>
     </div>
 
     <div class = "mt-4 pt-3 pb-1 px-5 " style="background-color: #ffe6ee;">
@@ -65,8 +65,9 @@
     <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
     <!--元のページのソート機能を保持したまま戻ることができる-->
   </div>
-
-  <%= render "user/shared/error_messages", resource: @comment %>
+  <div id = "comment_error">
+    <%= render "user/shared/error_messages", resource: @comment %>
+  </div>
 
   <div id = "comment_textarea" class = "mt-5" >
     <%= render "user/comments/form", review: @review, comment: @comment %>

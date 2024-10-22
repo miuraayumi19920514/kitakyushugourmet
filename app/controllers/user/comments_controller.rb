@@ -3,10 +3,13 @@ class User::CommentsController < ApplicationController
 
   def create
     @review = Review.find(params[:review_id])
-    comment = Comment.new(comment_params)
-    comment.user_id = current_user.id
-    comment.review_id = @review.id
-    comment.save
+    @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
+    @comment.review_id = @review.id
+    unless @comment.save
+      @user = @review.user
+      render "error"
+    end
   end
 
   def destroy
@@ -19,7 +22,7 @@ class User::CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:comment)
   end
-  
+
   def redirect_to_signup_unless_logged_in#ログインしていなければコメントボタンを押したときに新規登録画面に遷移する
     unless user_signed_in?
       redirect_to new_user_registration_path

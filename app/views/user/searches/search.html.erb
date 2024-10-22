@@ -17,6 +17,14 @@
     <% end %>
   </div>
 
+    <div class = " mt-4 mb-1">
+      <% if (@range == "レビュー" && @reviews.present?) %>
+        <p><%= @reviews.total_count %>件のレビューが見つかりました。</p>
+      <% elsif (@range == "ユーザー" && @users.present?) %>
+        <p><%= @users.total_count %>件のユーザーが見つかりました。</p>
+      <% end %>
+    </div>
+
   <% if @reviews.present? || @users.present? %>
     <div class = "mt-5">
     <h2>検索結果</h2>
@@ -34,20 +42,6 @@
       </div>
     </div>
 
-
-    <div class = " mt-4 mb-1">
-      <% if (@range == "レビュー" && @reviews.present?) %>
-        <p><%= @reviews.total_count %>件のレビューが見つかりました。</p>
-      <% elsif (@range == "ユーザー" && @users.present?) %>
-        <p><%= @users.total_count %>件のユーザーが見つかりました。</p>
-      <% else %>
-        <h4 class="text-danger text-center mt-5">ヒットしませんでした。</h4>
-        <div class = "d-flex justify-content-center mt-5">
-          <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
-          <!--元のページのソート機能を保持したまま戻ることができる-->
-        </div>
-      <% end %>
-    </div>
 
     <% unless (@range == "レビュー" && @reviews.blank?) || (@range == "ユーザー" && @users.blank?) %>
       <% if @range == "レビュー" %>
@@ -142,5 +136,11 @@
         <%= paginate @users %>
       <% end %>
     </div>
+    <% elsif !@word.blank? %>
+     <h4 class="text-danger text-center mt-5">ヒットしませんでした。</h4>
+        <div class = "d-flex justify-content-center mt-5">
+          <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
+          <!--元のページのソート機能を保持したまま戻ることができる-->
+        </div>
   <% end %>
 </div>
