@@ -59,7 +59,7 @@
               <th class = "text-center">ジャンル</th>
               <th class = "text-center">タイトル</th>
               <th class = "text-center">コメント数</th>
-              <th class = "text-center">いいね</th>
+              <th class = "text-center">いいね数</th>
             </tr>
           </thead>
           <tbody>
@@ -71,9 +71,7 @@
                 <td class = "text-center" id = "comment_count">
                   <%= render "user/comments/count", review: review %>
                 </td>
-                <td class = "text-center" id = "favorite_buttons_<%= review.id %>">
-                  <%= render "user/favorites/favorite", review: review %>
-                </td>
+                <td class = "text-center"><%= review.favorites.count %></td>
               </tr>
             <% end %>
           </tbody>

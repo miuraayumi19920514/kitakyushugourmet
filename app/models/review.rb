@@ -12,7 +12,7 @@ class Review < ApplicationRecord
 
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
-  
+
 
   has_one_attached :image
   def get_image(width, height)
@@ -22,7 +22,7 @@ class Review < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
-
+  
   def favorited?(user)
     return false unless user
     favorites.where(user_id: user.id).exists?
