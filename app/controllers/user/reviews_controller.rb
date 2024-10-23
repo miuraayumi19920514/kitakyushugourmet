@@ -10,7 +10,7 @@ class User::ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.user_id = current_user.id
     if @review.save
-      redirect_to mypage_path
+      redirect_to review_path(@review)
     else
       render :new
     end

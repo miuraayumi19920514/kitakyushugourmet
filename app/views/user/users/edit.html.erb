@@ -2,8 +2,10 @@
   <div class = "border py-3 px-5">
     <h2>プロフィール編集</h2>
     
-    <%= render "user/shared/error_messages", resource: @user %>
-
+    <div class = "my-5">
+      <%= render "user/shared/error_messages", resource: @user %>
+    </div>
+    
     <%= form_with model: @user, url: information_path, method: :patch do |f| %>
     
     <div class = "mt-5">

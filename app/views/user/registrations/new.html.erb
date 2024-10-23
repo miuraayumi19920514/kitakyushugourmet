@@ -19,9 +19,11 @@
     </div>
   <% end %>
 
-  <%= render "user/shared/error_messages", resource: resource %>
+  <div class = "my-5">
+    <%= render "user/shared/error_messages", resource: resource %>
+  </div>
 
-  <div class = "mt-5 row justify-content-center">
+  <div class = "row justify-content-center">
     <div>
       <%= f.label :name, "★表示名" %><br>
       <%= f.text_field :name, :placeholder => "※2～10字以内" %>

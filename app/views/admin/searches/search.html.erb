@@ -1,7 +1,7 @@
 <div class = "container col-8 my-5">
 
   <div class="search_form">
-    <%= form_with url: search_path, local: true, method: :get, class: "d-flex align-items-center" do |f| %>
+    <%= form_with url: admin_search_path, local: true, method: :get, class: "d-flex align-items-center" do |f| %>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">
@@ -47,14 +47,14 @@
       <% if @range == "レビュー" %>
         <table class="table border table-hover">
           <div class="d-flex justify-content-end">
-            <%= link_to '新しい順', search_path(latest: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
-            | <%= link_to '古い順', search_path(old: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
-            | <%= link_to '人気順', search_path(favorite_count: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
+            <%= link_to '新しい順', admin_search_path(latest: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
+            | <%= link_to '古い順', admin_search_path(old: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
+            | <%= link_to '人気順', admin_search_path(favorite_count: "true", word: params[:word], range: params[:range], local_person: @local_person, sort: true) %>
           </div>
           <thead style="background-color: #ffe6ee;">
             <tr>
               <th class="poster1">
-                <%= form_with url: search_path, method: :get, local: true do |f| %>
+                <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
                   <div class="form-group">
                     <%= hidden_field_tag :word, params[:word] %>
                     <%= hidden_field_tag :range, params[:range] %>
@@ -67,7 +67,7 @@
               <th class = "text-center">ジャンル</th>
               <th class = "text-center">タイトル</th>
               <th class = "text-center">コメント数</th>
-              <th class = "text-center">いいね</th>
+              <th class = "text-center">いいね数</th>
             </tr>
           </thead>
           <tbody>
@@ -80,15 +80,13 @@
                     <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{review.user.local_person}") %></h4>
                   <% end %>
                 </td>
-                <td class = "text-center"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+                <td class = "text-center"><h4><%= link_to review.shop , admin_review_path(review) %></h4></td>
                 <td class = "text-center"><%= review.genre %></td>
                 <td class = "text-center"><%= review.title %></td>
                 <td class = "text-center" id = "comment_count">
                   <%= render "user/comments/count", review: review %>
                 </td>
-                <td class = "text-center" id = "favorite_buttons_<%= review.id %>">
-                  <%= render "user/favorites/favorite", review: review %>
-                </td>
+                <td class = "text-center"><%= review.favorites.count %></td>
               </tr>
             <% end %>
           </tbody>
@@ -98,7 +96,7 @@
           <thead style="background-color: #a1e6e6;">
             <tr>
               <th class="poster1">
-                <%= form_with url: search_path, method: :get, local: true do %>
+                <%= form_with url: admin_search_path, method: :get, local: true do %>
                   <div class="form-group">
                     <%= hidden_field_tag :word, params[:word] %>
                     <%= hidden_field_tag :range, params[:range] %>
@@ -121,7 +119,7 @@
                     <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{user.local_person}") %></h4>
                   <% end %>
                 </td>
-                <td class="text-center"><h4><%= link_to user.name , user_path(user) %></h4></td>
+                <td class="text-center"><h4><%= link_to user.name , admin_user_path(user) %></h4></td>
                 <td class="text-center"><%= user.reviews.count %></td>
               </tr>
             <% end %>

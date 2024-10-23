@@ -12,7 +12,7 @@
     <thead style="background-color: #ffe6ee;">
       <tr>
         <th class="poster1">
-          <%= form_with url: reviews_path, method: :get, local: true do %>
+          <%= form_with url: admin_reviews_path, method: :get, local: true do %>
             <div class="form-group">
               <%= select_tag :local_person, options_for_select([['選択なし', ''], ['地元民', 'local'], ['旅行者', 'traveler']], selected: params[:local_person]), class: "form-control" %>
             </div>
@@ -23,7 +23,7 @@
         <th class = "text-center">ジャンル</th>
         <th class = "text-center">タイトル</th>
         <th class = "text-center">コメント数</th>
-        <th class = "text-center">いいね</th>
+        <th class = "text-center">いいね数</th>
       </tr>
     </thead>
     <tbody>
@@ -42,9 +42,7 @@
           <td class = "text-center" id = "comment_count">
             <%= render "user/comments/count", review: review %>
           </td>
-          <td class = "text-center" id = "favorite_buttons_<%= review.id %>">
-            <%= render "user/favorites/favorite", review: review %>
-          </td>
+          <td class = "text-center"><%= review.favorites.count %></td>
         </tr>
       <% end %>
     </tbody>
