@@ -60,6 +60,7 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem "enum_help"
 gem 'jquery-rails'
+gem 'rails-i18n'
 
 gem 'dotenv-rails'
 group :production do

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "user/registrations",
     sessions: 'user/sessions'
@@ -15,14 +15,14 @@ Rails.application.routes.draw do
     patch "withdrawal/:id" => "users#withdrawal", as: "withdrawal"
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :edit, :update, :destroy]
-    resources :comments, only: [:destroy]
+    resources :comments, only: [:index, :destroy]
   end
 
   scope module: :user do
     root to: 'homes#top'
     get '/about' => 'homes#about', as: 'about'
     get '/search' => "searches#search", as: 'search'
-    
+
     get '/users/mypage' =>'users#mypage', as: 'mypage'
     get '/users/infomation/edit' => 'users#edit', as: 'information_edit'
     get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
-    
+
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

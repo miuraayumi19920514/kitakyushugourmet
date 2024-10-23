@@ -68,6 +68,7 @@ class User::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @user = @review.user
     @comment = Comment.new
+    @comments = @review.comments.page(params[:page]).per(10)
   end
 
   def edit

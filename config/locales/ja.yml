@@ -11,6 +11,19 @@ ja:
 
 
   activerecord:
+    attributes:
+      review:
+        shop: "お店の名前"
+        address: "お店の住所"
+        genre: "ジャンル"
+        title: "タイトル"
+        body: "本文"
+        star: "初見の入りやすさ"
+      user:
+        introduction: "一言"
+        local_person: "ラジオボタン"
+      comment:
+        comment: "コメント"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
