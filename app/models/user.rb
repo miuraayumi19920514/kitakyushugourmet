@@ -10,9 +10,7 @@ class User < ApplicationRecord
   has_many :comments ,dependent: :destroy
   has_many :favorites ,dependent: :destroy
 
-  validates :email, presence: true
-  validates :encrypted_password, presence: true, length: { minimum: 6 }, on: :create
-  validates :name,  presence: true, length: { in: 2..10 }, uniqueness: true
+  validates :name, length: { in: 2..10 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
   validates :local_person, presence: true
 

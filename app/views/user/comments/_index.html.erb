@@ -1,11 +1,11 @@
 <h3 class = "mb-3">コメント一覧</h3>
 
-<% if review.comments.empty? %>
+<% if comments.empty? %>
   コメントはまだありません。
 <% else %>
   <table class = "table">
     <tbody>
-      <% review.comments.each do |comment| %>
+      <% comments.each do |comment| %>
         <tr>
             <td><%= comment.comment %></td>
             <td><%= comment.user.name %></td>
@@ -17,4 +17,7 @@
       <% end %>
     </tbody>
   </table>
+  <div class = "d-flex justify-content-center">
+    <%= paginate comments %>
+  <div>
 <% end %>
