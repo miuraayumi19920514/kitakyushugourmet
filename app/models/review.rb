@@ -10,6 +10,9 @@ class Review < ApplicationRecord
   validates :body, presence: true, length: { in: 2..400 }
   validates :star, presence: true
 
+  geocoded_by :address#addressカラムの内容を緯度・経度に変換することを指定
+  after_validation :geocode#バリデーションの実行後に変換処理を実行して、latitudeカラム・longitudeカラムに緯度・経度の値が入力
+
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
 
@@ -22,7 +25,7 @@ class Review < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def favorited?(user)
     return false unless user
     favorites.where(user_id: user.id).exists?

@@ -1,12 +1,13 @@
 <div class = "container col-6 my-5">
 
   <div class = "container border py-3 px-5" style="position: relative;">
+
     <div class = "mt-4">
-      <h2><%= @review.shop %></h2>
+      <h2><strong><i class="fa-solid fa-flag mr-2"></i><%= @review.shop %></strong></h2>
     </div>
 
     <div class = "ml-4 mb-5">
-      <%= @review.address %>
+      <span><i class="fa-solid fa-location-dot"></i><%= @review.address %></span>
     </div>
 
     <div id="favorite_buttons_<%= @review.id %>" style="position: absolute; right: 15px; top: 10px;">
@@ -44,7 +45,7 @@
 
       <div style="position: absolute; right: 10px; bottom: 10px;">
         <% if @review.user == current_user && params[:from_mypage] %>
-          <%= link_to "編集", edit_review_path(@review, from_mypage: true), class: "btn btn-sm btn-success w-40" %>
+          <%= link_to "編集", edit_review_path(@review, from_mypage: true), class: "btn btn-sm btn-success w-40", data: {turbolinks: "false"} %>
           <%= link_to "削除", review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger float-end" %>
         <% end %>
       </div>
@@ -92,4 +93,3 @@
     <%= render "user/comments/index", comments: @comments %>
   </div>
 </div>
-

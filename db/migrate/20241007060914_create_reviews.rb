@@ -4,7 +4,6 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       
       t.integer :user_id, null: false
       t.string :shop, null: false
-      t.string :address, null: false
       t.string :genre, null: false
       t.string :title, null: false
       t.text :body, null: false
