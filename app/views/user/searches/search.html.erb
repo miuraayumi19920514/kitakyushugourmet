@@ -80,7 +80,7 @@
                     <h4 class="person_traveler"><%= I18n.t("enums.user.local_person.#{review.user.local_person}") %></h4>
                   <% end %>
                 </td>
-                <td class = "text-center"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+                <td class = "text-center"><h4><%= link_to review.shop, review_path(review) %></h4></td>
                 <td class = "text-center"><%= review.genre %></td>
                 <td class = "text-center"><%= review.title %></td>
                 <td class = "text-center" id = "comment_count">

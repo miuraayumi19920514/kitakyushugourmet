@@ -32,7 +32,7 @@
           </td>
           <td class = "text-center"><h4><%=link_to user.name , admin_user_path(user) %></h4></td>
           <td class = "text-center"><%= user.reviews.count %></td>
-          <td class = "text-center"><%= user.is_active ? "有効" : "退会済み" %></td>
+          <td class = "text-center"><%= content_tag :span, (user.is_active ? "有効" : "退会済み"), class: (user.is_active ? "text-success" : "text-danger") %></td>
         </tr>
       </tbody>
     <% end %>

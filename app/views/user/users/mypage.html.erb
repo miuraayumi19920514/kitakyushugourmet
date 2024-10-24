@@ -63,7 +63,7 @@
         <tbody>
           <% @reviews.each do |review| %>
             <tr>
-              <td class = "text-center"><h4><%= link_to review.shop , review_path(review) %></h4></td>
+              <td class = "text-center"><h4><%= link_to review.shop, review_path(review, from_mypage: true) %></h4></td>
               <td class = "text-center"><%= review.genre %></td>
               <td class = "text-center"><%= review.title %></td>
               <td class = "text-center" id = "comment_count">
