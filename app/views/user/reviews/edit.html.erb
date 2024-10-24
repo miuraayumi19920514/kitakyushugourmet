@@ -10,27 +10,38 @@
 
   <%= form_with model: @review, url: review_path(@review), method: :patch do |f| %>
 
-    <div class = "mt-4">
+    <div class = "mt-5">
       <%= f.label :shop , "★お店の名前" %>
       <%= f.text_field :shop, :placeholder => "※1～20字以内", class: "form-control", required: true %>
     </div>
 
-    <div class = "mt-4">
-      <%= f.label :address , "★お店の住所" %>
-      <%= f.text_field :address, :placeholder => "※10～50字以内", class: "form-control", required: true %>
+    <div class = "mt-5">
+      <%= f.label :address, "★お店の住所" %>
+      <div class = "input-group">
+        <div class = "input-group-prepend">
+          <span class = "input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
+        </div>
+        <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号で検索" %>
+      </div>
+      <div class = "input-group mt-2">
+        <div class = "input-group-prepend">
+          <span class = "input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+        </div>
+        <%= f.text_field :address, :placeholder => "※10～50字以内", class: "form-control", required: true, placeholder: "住所" %>
+      </div>
     </div>
 
-    <div class = "mt-4">
+    <div class = "mt-5">
       <%= f.label :title , "★タイトル" %>
       <%= f.text_field :title, :placeholder => "※5～20字以内", class: "form-control", required: true %>
     </div>
 
-    <div class = "mt-4">
+    <div class = "mt-5">
       <%= f.label :body , "★本文" %>
       <%= f.text_field :body, :placeholder => "※2～400字以内", class: "form-control", required: true %>
     </div>
 
-    <div class="form-group position-static mt-4">
+    <div class="form-group position-static mt-5">
         <div id="post_raty">★初見の入りやすさ：</div> <!-- 星を出力するセレクタ -->
           <script>
               var elem = document.querySelector('#post_raty');
@@ -44,7 +55,7 @@
           </script>
     </div>
 
-    <div class="mt-4">
+    <div class="mt-5">
       <%= f.label :image , "★写真" %><br>
       <%= f.file_field :image, accept: "image/*" %>
     </div>
@@ -63,3 +74,5 @@
 
   <% end %>
 </div>
+
+<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
