@@ -50,5 +50,6 @@ class User::SearchesController < ApplicationController
     end
   end
 
+
 end
 
