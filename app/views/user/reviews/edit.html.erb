@@ -54,7 +54,7 @@
     </div>
 
     <div class = "d-flex justify-content-center mb-4">
-      <%= link_to "戻る", review_path(@review) %>
+      <%= link_to "戻る", review_path(@review, from_mypage: params[:from_mypage]) %>
     </div>
 
   <% end %>

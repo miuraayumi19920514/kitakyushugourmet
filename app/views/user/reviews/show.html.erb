@@ -43,9 +43,9 @@
       </div>
 
       <div style="position: absolute; right: 10px; bottom: 10px;">
-        <% if @review.user == current_user %>
-          <%= link_to "編集" , edit_review_path(@review), class: "btn btn-sm btn-success w-40" %>
-          <%= link_to "削除" , review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger float-end" %>
+        <% if @review.user == current_user && params[:from_mypage] %>
+          <%= link_to "編集", edit_review_path(@review, from_mypage: true), class: "btn btn-sm btn-success w-40" %>
+          <%= link_to "削除", review_path(@review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger float-end" %>
         <% end %>
       </div>
     </div>
@@ -62,9 +62,18 @@
   </div>
 
   <div class = "d-flex justify-content-center mt-3 mb-4">
-    <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
-    <!--元のページのソート機能を保持したまま戻ることができる-->
+    <% if @review.user == current_user %>
+      <% if params[:from_mypage] %>
+        <%= link_to "戻る", mypage_path %>
+      <% else %>
+        <%= link_to "戻る", reviews_path %>
+      <% end %>
+    <% else %>
+      <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
+      <!--元のページのソート機能を保持したまま戻ることができる-->
+    <% end %>
   </div>
+  
   <div id = "comment_error">
     <%= render "user/shared/error_messages", resource: @comment %>
   </div>

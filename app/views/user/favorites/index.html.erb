@@ -53,4 +53,8 @@
       <%= paginate @reviews %>
     </div>
   <% end %>
+    <div class = "d-flex justify-content-center mt-5">
+      <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
+      <!--元のページのソート機能を保持したまま戻ることができる-->
+    </div>
 </div>
