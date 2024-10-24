@@ -77,6 +77,7 @@ class User::ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
+    @review.update(image: nil) if review_params[:image] == nil
     if @review.update(review_params)
       redirect_to mypage_path
     else

@@ -65,15 +65,21 @@
     <% if @review.user == current_user %>
       <% if params[:from_mypage] %>
         <%= link_to "戻る", mypage_path %>
+      <% elsif params[:from_search] %>
+        <%= link_to "戻る", params[:from_search] %>
       <% else %>
-        <%= link_to "戻る", reviews_path %>
+        <%= link_to "戻る", mypage_path %>
       <% end %>
     <% else %>
-      <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
-      <!--元のページのソート機能を保持したまま戻ることができる-->
+      <% if params[:from_search] %>
+        <%= link_to "戻る", params[:from_search] %>
+      <% else %>
+        <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
+        <!-- 元のページのソート機能を保持したまま戻ることができる -->
+      <% end %>
     <% end %>
   </div>
-  
+
   <div id = "comment_error">
     <%= render "user/shared/error_messages", resource: @comment %>
   </div>

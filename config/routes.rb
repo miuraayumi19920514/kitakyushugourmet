@@ -24,9 +24,10 @@ Rails.application.routes.draw do
     get '/search' => "searches#search", as: 'search'
 
     get '/users/mypage' =>'users#mypage', as: 'mypage'
-    get '/users/infomation/edit' => 'users#edit', as: 'information_edit'
+    get '/users/information/edit' => 'users#edit', as: 'information_edit'
     get '/users/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
     get '/users/unsubscribe/completion' => 'users#completion', as: 'completion'
+    get  "/users/information" => redirect("/users/information/edit")
     patch '/users/information' => 'users#update', as: 'information'
     patch '/users/withdraw' => 'users#withdraw', as: 'withdraw'
     resources :users, only: [:index, :show] do

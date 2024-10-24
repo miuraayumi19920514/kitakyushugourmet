@@ -48,6 +48,8 @@ class User::UsersController < ApplicationController
 
   def update
     @user = current_user
+
+    @user.update(image: nil) if user_params[:image] == nil
     if @user.update(user_params)
       redirect_to mypage_path(@user)
     else
