@@ -1,78 +1,79 @@
-<div class = "container border col-6 my-5">
+<div class = "container my-5">
+  <div class="row justify-content-center">
+    <div class="col-10">
 
-  <div class = "mt-3">
-    <h2>レビュー編集</h2>
-  </div>
+      <div class = "border py-3 px-4">
+        <h2>レビュー編集</h2>
 
-  <div class = "my-5">
-    <%= render "user/shared/error_messages", resource: @review %>
-  </div>
-
-  <%= form_with model: @review, url: review_path(@review), method: :patch do |f| %>
-
-    <div class = "mt-5">
-      <%= f.label :shop , "★お店の名前" %>
-      <%= f.text_field :shop, :placeholder => "※1～20字以内", class: "form-control", required: true %>
-    </div>
-
-    <div class = "mt-5">
-      <%= f.label :address, "★お店の住所" %>
-      <div class = "input-group">
-        <div class = "input-group-prepend">
-          <span class = "input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
+        <div class = "my-5">
+          <%= render "user/shared/error_messages", resource: @review %>
         </div>
-        <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号で検索" %>
+
+        <%= form_with model: @review, url: review_path(@review), method: :patch do |f| %>
+          <div class = "mt-5">
+            <%= f.label :shop, "★お店の名前" %>
+            <%= f.text_field :shop, :placeholder => "※1～20字以内", class: "form-control", required: true %>
+          </div>
+
+          <div class = "mt-5">
+            <%= f.label :address, "★お店の住所" %>
+            <div class = "input-group">
+              <div class = "input-group-prepend">
+                <span class = "input-group-text" aria-hidden="true"><i class="fa-solid fa-tenge-sign"></i></span>
+              </div>
+              <%= text_field_tag :zipcode, nil, class: "form-control", placeholder: "郵便番号で検索" %>
+            </div>
+            <div class = "input-group mt-2">
+              <div class = "input-group-prepend">
+                <span class = "input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
+              </div>
+              <%= f.text_field :address, :placeholder => "※10～50字以内", class: "form-control", required: true, placeholder: "住所" %>
+            </div>
+          </div>
+
+          <div class = "mt-5">
+            <%= f.label :title, "★タイトル" %>
+            <%= f.text_field :title, :placeholder => "※5～20字以内", class: "form-control", required: true %>
+          </div>
+
+          <div class = "mt-5">
+            <%= f.label :body, "★本文" %>
+            <%= f.text_field :body, :placeholder => "※2～400字以内", class: "form-control", required: true %>
+          </div>
+
+          <div class="form-group position-static mt-5">
+            <div id="post_raty">★初見の入りやすさ：</div> <!-- 星を出力するセレクタ -->
+              <script>
+                var elem = document.querySelector('#post_raty');
+                var opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    scoreName: 'review[star]',
+                    score: <%= @review.star %>
+                };
+                raty(elem,opt);
+              </script>
+          </div>
+
+          <div class="mt-5">
+            <%= f.label :image, "★写真" %><br>
+            <%= f.file_field :image, accept: "image/*" %>
+          </div>
+
+          <div class = "d-flex justify-content-center mt-5 mb-3">
+            <%= f.submit "変更" , class: "btn btn-success w-40" %>
+          </div>
+        <% end %>
       </div>
-      <div class = "input-group mt-2">
-        <div class = "input-group-prepend">
-          <span class = "input-group-text" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></span>
-        </div>
-        <%= f.text_field :address, :placeholder => "※10～50字以内", class: "form-control", required: true, placeholder: "住所" %>
+      <div class = "d-flex justify-content-center my-5">
+        <% if params[:from_mypage] %>
+          <%= link_to "戻る", review_path(@review, from_mypage: params[:from_mypage]) %>
+        <% else %>
+          <%= link_to "戻る", mypage_path %>
+        <% end %>
       </div>
     </div>
-
-    <div class = "mt-5">
-      <%= f.label :title , "★タイトル" %>
-      <%= f.text_field :title, :placeholder => "※5～20字以内", class: "form-control", required: true %>
-    </div>
-
-    <div class = "mt-5">
-      <%= f.label :body , "★本文" %>
-      <%= f.text_field :body, :placeholder => "※2～400字以内", class: "form-control", required: true %>
-    </div>
-
-    <div class="form-group position-static mt-5">
-        <div id="post_raty">★初見の入りやすさ：</div> <!-- 星を出力するセレクタ -->
-          <script>
-              var elem = document.querySelector('#post_raty');
-              var opt = {
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  scoreName: 'review[star]',
-                  score: <%= @review.star %>
-              };
-              raty(elem,opt);
-          </script>
-    </div>
-
-    <div class="mt-5">
-      <%= f.label :image , "★写真" %><br>
-      <%= f.file_field :image, accept: "image/*" %>
-    </div>
-
-    <div class = "d-flex justify-content-center mt-5 mb-3">
-      <%= f.submit "変更" , class: "btn btn-success w-40" %>
-    </div>
-
-    <div class = "d-flex justify-content-center mb-4">
-      <% if params[:from_mypage] %>
-        <%= link_to "戻る", review_path(@review, from_mypage: params[:from_mypage]) %>
-      <% else %>
-        <%= link_to "戻る", mypage_path %>
-      <% end %>
-    </div>
-
-  <% end %>
+  </div>
 </div>
 
 <%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>

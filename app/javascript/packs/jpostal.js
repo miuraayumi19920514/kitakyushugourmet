@@ -1,3 +1,4 @@
+/* global $ */
 function jpostal() {
   $('#zipcode').jpostal({
     postcode : ['#zipcode'],
