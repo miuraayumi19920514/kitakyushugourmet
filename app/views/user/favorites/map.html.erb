@@ -1,0 +1,14 @@
+<div class = "container my-5">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <div class = "py-3">
+        <h2>いいねマップ</h2>
+        <p><i class="fa-solid fa-location-dot"></i>いいねしたレビューのみを表示しています。</p>
+        <p class = "mb-5">※全てのレビューに<%= link_to "変更", map_path, class: "btn  btn-sm btn-success"%>
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'favorites_map', 'data-turbolinks-track': 'reload' %>

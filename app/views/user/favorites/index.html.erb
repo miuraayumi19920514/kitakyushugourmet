@@ -12,6 +12,13 @@
         <% if @favorites.empty? %>
           <div class = "mt-4">まだ、いいねしてません。</div>
         <% else %>
+          <% if @user == current_user %>
+            <%= link_to favorites_map_path(id: @user.id) do %>
+              <button type="button"class="btn btn-outline-secondary mt-3 mb-2"style="background-color: #99CCFF; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">
+                マップで見る
+              </button>
+            <% end %>
+          <% end %>
           <div class="d-flex justify-content-end">
             <%= link_to '新しい順', user_favorites_path(@user, latest: true) %>
             | <%= link_to '古い順', user_favorites_path(@user, old: true) %>

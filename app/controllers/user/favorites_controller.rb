@@ -30,7 +30,9 @@ class User::FavoritesController < ApplicationController
     @favorite = current_user.favorites.find_by(review_id: @review.id)
     @favorite.destroy
   end
-
+  
+  def map
+  end
 
   private
 
