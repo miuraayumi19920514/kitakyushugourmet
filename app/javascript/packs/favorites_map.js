@@ -20,10 +20,20 @@ async function initMap() {
     mapTypeControl: false
   });
 
+  // URLのクエリ文字列を取得
+  const queryString = window.location.search;
+
+  // URLSearchParamsオブジェクトを作成してクエリ文字列を解析
+  const params = new URLSearchParams(queryString);
+
+  // 特定のパラメータの値を取得
+  const paramValue = params.get('id');
+
   // 追記
   /* global fetch */
   try {
-    const response = await fetch("/reviews.json");
+    const response = await fetch(`/users/${paramValue}/favorites.json`);
+
     if (!response.ok) throw new Error('Network response was not ok');
 
     const { data: { items } } = await response.json();
@@ -47,13 +57,10 @@ async function initMap() {
         // 他の任意のオプションもここに追加可能
       });
       // 追記
-
       const contentString = `
         <div class="information container p-0">
           <div class="d-flex align-items-center">
-            <div class="d-flex align-items-center">
-              <h1 class="h4 font-weight-bold"><a href="/reviews/${reviewID}">${shopName}</a></h1>
-            </div>
+            <h1 class="h4 font-weight-bold"><a href="/reviews/${reviewID}">${shopName}</a></h1>
           </div>
           <div>
             <p><strong>${genre}</strong></p>
@@ -85,6 +92,3 @@ async function initMap() {
 }
 
 initMap()
-
-
-

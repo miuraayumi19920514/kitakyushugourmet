@@ -1,4 +1,4 @@
 $('#comment_count').html("<%= j(render 'user/comments/count', review: @review) %>");
-$('#comment_index').html("<%= j(render 'user/comments/index', review: @review) %>");
+$('#comment_index').html("<%= j(render 'user/comments/index', comments: @comments) %>");
 $('#comment_comment').val("");
 $('#comment_error').empty();

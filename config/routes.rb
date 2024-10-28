@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   namespace :admin do
     get 'maps/show'
   end
@@ -34,17 +34,18 @@ Rails.application.routes.draw do
     get  "/users/information" => redirect("/users/information/edit")
     patch '/users/information' => 'users#update', as: 'information'
     patch '/users/withdraw' => 'users#withdraw', as: 'withdraw'
-    
+
     resources :users, only: [:index, :show] do
       resources :favorites, only: [:index]
     end
-    
+
     resources :reviews do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
-    
+
     resource :map, only: [:show]
+    get '/favorites_map' => 'favorites#map', as: 'favorites_map'
 
   end
 

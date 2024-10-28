@@ -4,6 +4,7 @@ class User::CommentsController < ApplicationController
   def create
     @review = Review.find(params[:review_id])
     @comment = Comment.new(comment_params)
+    @comments = @review.comments.page(params[:page]).per(10)
     @comment.user_id = current_user.id
     @comment.review_id = @review.id
     unless @comment.save
@@ -15,6 +16,7 @@ class User::CommentsController < ApplicationController
   def destroy
     @review = Review.find(params[:review_id])
     @comment = @review.comments.find(params[:id])
+    @comments = @review.comments.page(params[:page]).per(10)
     @comment.destroy
   end
 
