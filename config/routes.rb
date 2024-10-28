@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  namespace :admin do
+    get 'maps/show'
+  end
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "user/registrations",
     sessions: 'user/sessions'
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :edit, :update, :destroy]
     resources :comments, only: [:index, :destroy]
+    resource :map, only: [:show]
   end
 
   scope module: :user do
@@ -38,8 +42,9 @@ Rails.application.routes.draw do
     resources :reviews do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
-      resource :map, only: [:show]
     end
+    
+    resource :map, only: [:show]
 
   end
 
