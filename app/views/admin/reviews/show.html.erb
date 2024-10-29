@@ -22,8 +22,8 @@
           投稿日：<%= @review.created_at.strftime('%Y/%m/%d') %>
         </div>
 
-        <div class = "mt-1" style="display: flex;">
-          初見の入りやすさ度：
+        <div class = "mt-1 hosi" style="display: flex;">
+          <span class = "hosi1">初見の入りやすさ度：</span>
           <%= render "user/reviews/output_star", review: @review %>
         </div>
 

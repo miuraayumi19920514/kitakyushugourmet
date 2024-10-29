@@ -1,5 +1,21 @@
 @use '~bootstrap/scss/bootstrap';
 
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', 'Kosugi', sans-serif;
+  background-image: url('../images/back.png');
+}
+
+.main {
+  min-height: 60vh;
+
+}
+
 // userのindex,reviewのindex,favoriteのindexページのテーブルの列のレイアウト
 .poster {
   border-right: 1px solid gray;
@@ -66,4 +82,19 @@
 #map {
   width: 100%;
   height: calc(100vh - 88px - 179px);
+}
+
+@media screen and (max-width:375px) {
+  .hosi {
+    font-size: 8px;
+  }
+
+  .hosi1 {
+    font-size: 10px;
+    padding-top: 8px;
+  }
+
+  #error_explanation{
+    font-size: 10px;
+  }
 }

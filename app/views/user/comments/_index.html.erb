@@ -3,20 +3,22 @@
 <% if comments.empty? %>
   コメントはまだありません。
 <% else %>
-  <table class = "table">
-    <tbody>
-      <% comments.each do |comment| %>
-        <tr>
-            <td><%= comment.comment %></td>
-            <td><%= comment.user.name %></td>
-            <td><% if comment.user == current_user %>
-                  <%= link_to "削除", review_comment_path(comment.review, comment), method: :delete , data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %>
-                <% end %>
-            </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class = "table">
+      <tbody>
+        <% comments.each do |comment| %>
+          <tr>
+              <td><%= comment.comment %></td>
+              <td><%= comment.user.name %></td>
+              <td nowrap><% if comment.user == current_user %>
+                    <%= link_to "削除", review_comment_path(comment.review, comment), method: :delete , data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %>
+                  <% end %>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
   <div class = "d-flex justify-content-center">
     <%= paginate comments %>
   <div>

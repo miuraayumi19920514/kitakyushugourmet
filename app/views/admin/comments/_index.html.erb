@@ -3,15 +3,17 @@
 <% if review.comments.empty? %>
   コメントはまだありません。
 <% else %>
-  <table class = "table">
-    <tbody>
-      <% review.comments.each do |comment| %>
-        <tr>
+  <div class="table-responsive">
+    <table class = "table">
+      <tbody>
+        <% review.comments.each do |comment| %>
+          <tr>
             <td><%= comment.comment %></td>
             <td><%= comment.user.name %></td>
-            <td><%= link_to "削除", admin_comment_path(comment), method: :delete , data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+            <td nowrap><%= link_to "削除", admin_comment_path(comment), method: :delete , data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <div>
 <% end %>
