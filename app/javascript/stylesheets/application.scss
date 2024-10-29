@@ -8,12 +8,16 @@ box-sizing: border-box;
 
 body {
   font-family: 'Open Sans', 'Kosugi', sans-serif;
-  background-image: url('../images/back.png');
+  background-image: url('../images/back-image.jpg');
+  background-size: cover;
 }
 
 .main {
   min-height: 60vh;
+}
 
+.col-10 {
+  background-color: #ffffff;
 }
 
 // userのindex,reviewのindex,favoriteのindexページのテーブルの列のレイアウト
