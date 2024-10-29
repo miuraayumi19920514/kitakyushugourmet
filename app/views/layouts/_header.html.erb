@@ -1,125 +1,191 @@
 <header class = "border" style = "background-color: #ffffe6;">
 
-  <nav>
+  <nav class="navbar navbar-expand-lg navbar-light">
     <% if user_signed_in? %>
-      <div class = "text-center mt-2 mb-1">
-        <%= link_to reviews_path do %>
-          <%= image_tag 'kita.png' , size: "150x60" , class:"kita"%>
+      <div class = "mt-2 mb-1 mx-3">
+        <%= link_to reviews_path, class:"navbar-brand" do %>
+          <%= image_tag 'kita.png', size: "200x80", class:"kita"%>
         <% end %>
       </div>
 
-      <div class="d-flex justify-content-center">
-        <ul class="navbar-nav" style="flex-direction: row;">
-          <li>
-            <%= link_to mypage_path(current_user.id) , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">マイページ</button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mt-4">
+          <li class="nav-item">
+            <%= link_to mypage_path(current_user.id), class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                マイページ
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to new_review_path , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">投稿</button>
+          <li class="nav-item">
+            <%= link_to new_review_path, class:"nav-link", data: {turbolinks: "false"} do %>
+              <button type="button" class="btn btn-outline-secondary mr-1" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                投稿
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to reviews_path , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">みんなのレビュー</button>
+          <li class="nav-item">
+            <%= link_to reviews_path, class:"nav-link" do %>
+              <button type="button" class="btn btn-outline-secondary mr-1" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                レビュー
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to users_path , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">全てのユーザー</button>
+          <li class="nav-item">
+            <%= link_to users_path, class:"nav-link" do %>
+              <button type="button" class="btn btn-outline-secondary mr-1" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                ユーザー
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to destroy_user_session_path, method: :delete, class:"nav-link text-light" do%>
-              <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">ログアウト</button>
+          <li class="nav-item">
+            <%= link_to map_path, class:"nav-link" do %>
+              <button type="button" class="btn btn-outline-secondary mr-1" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                マップ
+              </button>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to search_path, class:"nav-link" do %>
+              <button type="button" class="btn btn-outline-secondary mr-1" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                検索
+              </button>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_user_session_path, method: :delete, class:"nav-link" do%>
+              <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                ログアウト
+              </button>
             <% end %>
           </li>
         </ul>
       </div>
 
-      <div class="d-flex justify-content-center my-2" style="margin-left: 920px;">
-        <%= link_to search_path do %>
-          <button type="button" class="btn btn-outline-secondary" style="background-color: #b3d9ff; color: black; font-weight: 600; border-color: #475766; width: 70px;">検索</button>
-        <% end %>
-      </div>
 
     <% elsif admin_signed_in? %>
-      <div class = "text-center mt-2 mb-1">
-        <%= link_to admin_reviews_path do %>
-          <%= image_tag 'kita.png' , size: "150x60" , class:"kita"%>
+      <div class = "mt-2 mb-1 mx-3">
+        <%= link_to admin_users_path, class:"navbar-brand" do %>
+          <%= image_tag 'kita.png', size: "200x80" , class:"kita"%>
         <% end %>
       </div>
 
-      <div class="d-flex justify-content-center ">
-        <ul class="navbar-nav" style="flex-direction: row;">
-          <li>
-            <%= link_to admin_users_path , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">会員一覧</button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mt-4">
+          <li class="nav-item">
+            <%= link_to admin_users_path, class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">
+                ユーザー一覧
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to admin_reviews_path , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">レビュー一覧</button>
+          <li class="nav-item">
+            <%= link_to admin_reviews_path, class:"nav-link text-light" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">
+                レビュー一覧
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to admin_comments_path , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">コメント一覧</button>
+          <li class="nav-item">
+            <%= link_to admin_comments_path, class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">
+                コメント一覧
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link text-light" do%>
-              <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">ログアウト</button>
+          <li class="nav-item">
+            <%= link_to admin_map_path, class:"nav-link" do %>
+              <button type="button" class="btn btn-outline-secondary mr-1" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">
+                マップ
+              </button>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_search_path, class:"nav-link" do %>
+              <button type="button" class="btn btn-outline-secondary mr-1" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">
+                検索
+              </button>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link" do%>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 130px;">
+                ログアウト
+              </button>
             <% end %>
           </li>
         </ul>
-      </div>
-
-      <div class="d-flex justify-content-center my-2" style="margin-left: 590px;">
-        <%= link_to admin_search_path do %>
-          <button type="button" class="btn btn-outline-secondary" style="background-color: #b3d9ff; color: black; font-weight: 600; border-color: #475766; width: 70px;">検索</button>
-        <% end %>
       </div>
 
     <% else %>
-      <div class = "text-center mt-2 mb-1">
-        <%= link_to root_path do %>
-          <%= image_tag 'kita.png' , size: "150x60" , class:"kita"%>
+      <div class = "mt-2 mb-1 mx-3">
+        <%= link_to root_path, class:"navbar-brand" do %>
+          <%= image_tag 'kita.png', size: "200x80" , class:"kita"%>
         <% end %>
       </div>
 
-      <div class="d-flex justify-content-center ">
-        <ul class="navbar-nav" style="flex-direction: row;">
-          <li>
-            <%= link_to about_path  , class:"nav-link text-light" do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">About</button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mt-4">
+          <li class="nav-item">
+            <%= link_to about_path, class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                About
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to  reviews_path , class:"nav-link text-light"  do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">みんなのレビュー</button>
+          <li class="nav-item">
+            <%= link_to  reviews_path, class:"nav-link"  do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                レビュー
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to new_user_registration_path , class:"nav-link text-light"  do %>
-              <button type="button" class="btn btn-outline-secondary mr-5" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 160px;">新規登録</button>
+          <li class="nav-item">
+            <%= link_to map_path, class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                マップ
+              </button>
             <% end %>
           </li>
-          <li>
-            <%= link_to new_user_session_path , class:"nav-link text-light"  do %>
-              <button type="button" class="btn btn-outline-secondary" style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 150px;">ログイン</button>
+          <li class="nav-item">
+            <%= link_to search_path, class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                検索
+              </button>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_user_registration_path, class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                新規登録
+              </button>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_user_session_path, class:"nav-link" do %>
+              <button type="button"class="btn btn-outline-secondary mr-1"style="background-color: #ffffff; color: black; font-weight: 400; border-color: #d3d3d3; width: 110px;">
+                ログイン
+              </button>
             <% end %>
           </li>
         </ul>
       </div>
-
-      <div class="d-flex justify-content-center my-2" style="margin-left: 700px;">
-        <%= link_to search_path do %>
-          <button type="button" class="btn btn-outline-secondary" style="background-color: #b3d9ff; color: black; font-weight: 600; border-color: #475766; width: 70px;">検索</button>
-        <% end %>
-      </div>
-
     <% end %>
   </nav>
 </header>
+
+
+
+

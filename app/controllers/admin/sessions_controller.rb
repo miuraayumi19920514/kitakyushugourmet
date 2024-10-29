@@ -17,7 +17,7 @@ class Admin::SessionsController < Devise::SessionsController
   def admin_state
       admin= Admin.find_by(email: params[:admin][:email])
       if admin.nil?
-        flash[:alert] = "メールアドレスが。"
+        flash[:alert] = "メールアドレスが違います。"
         redirect_to new_admin_session_path and return
       end
 

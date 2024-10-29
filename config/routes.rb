@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'maps/show'
+  end
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "user/registrations",
     sessions: 'user/sessions'
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :edit, :update, :destroy]
     resources :comments, only: [:index, :destroy]
+    resource :map, only: [:show]
   end
 
   scope module: :user do
@@ -30,13 +34,18 @@ Rails.application.routes.draw do
     get  "/users/information" => redirect("/users/information/edit")
     patch '/users/information' => 'users#update', as: 'information'
     patch '/users/withdraw' => 'users#withdraw', as: 'withdraw'
+
     resources :users, only: [:index, :show] do
       resources :favorites, only: [:index]
     end
+
     resources :reviews do
       resources :comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
+
+    resource :map, only: [:show]
+    get '/favorites_map' => 'favorites#map', as: 'favorites_map'
 
   end
 

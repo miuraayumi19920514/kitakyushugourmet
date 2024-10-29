@@ -1,85 +1,89 @@
-<div class = "container col-8 my-5">
-  <div class = "border py-3 px-5">
-    <h2>マイページ</h2>
-
-      <div class = "container">
-
-        <% if @user.local_person == "local" %>
-          <h4 class="person_local mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
-        <% else %>
-          <h4 class="person_traveler mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
-        <% end %>
-
-        <div class = "row">
-          <div class = "col-5 d-flex flex-column mt-2">
-            <%= image_tag @user.get_image(100,100) %>
+<div class = "container my-5">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      
+      <div class = "border py-3 px-4">
+        <h2 class="text-nowrap">マイページ</h2>
+          <div class = "container">
+            <% if @user.local_person == "local" %>
+              <h4 class="person_local mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
+            <% else %>
+              <h4 class="person_traveler mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
+            <% end %>
+            <div class = "row">
+              <div class = "col-sm-5 d-flex flex-column mt-2">
+                <%= image_tag @user.get_image(100,100) %>
+              </div>
+              <div class = "col-sm-7 d-flex flex-column mt-2">
+                <table class="table table-sm">
+                  <tbody>
+                    <tr>
+                      <th>名前：</th><td><h4><%= @user.name %></h4></td>
+                    </tr>
+                    <tr>
+                      <th>一言：</th><td><%= @user.introduction %></td>
+                    </tr>
+                    <tr>
+                      <th style="white-space: nowrap;">いいね一覧：</th><td><%= link_to "見る", user_favorites_path(@user) %></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class = "text-center"><%= link_to "編集" , information_edit_path, class: "btn btn-sm btn-success" %></div>
+              </div>
+            </div>
           </div>
-          <div class = "col-7 d-flex flex-column mt-2">
-            <table class="table table-sm">
+      </div>
+
+      <div>
+        <div class = "mt-4 mb-2">
+          <h5>マイレビュー一覧</h5>
+        </div>
+
+        <% if @reviews.empty? %>
+          投稿はまだありません
+        <% else %>
+          <div class = "d-flex justify-content-end">
+            <%= link_to '新しい順', mypage_path(latest: "true") %>
+            |<%= link_to '古い順', mypage_path(old: "true") %>
+            |<%= link_to '人気順', mypage_path(favorite_count: "true") %>
+          </div>
+          <div class="table-responsive">
+            <table class="table border table-hover">
+              <thead style="background-color: #ffe6ee;">
+                <tr>
+                  <th class = "text-center" nowrap>店名</th>
+                  <th class = "text-center" nowrap>ジャンル</th>
+                  <th class = "text-center" nowrap>タイトル</th>
+                  <th class = "text-center" nowrap>コメント数</th>
+                  <th class = "text-center" nowrap>いいね数</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
               <tbody>
-                <tr>
-                  <th>名前：</th><td><h4><%= @user.name %></h4></td>
-                </tr>
-                <tr>
-                  <th>一言：</th><td><%= @user.introduction %></td>
-                </tr>
-                <tr>
-                  <th style="white-space: nowrap;">いいね一覧：</th><td><%= link_to "見る", user_favorites_path(@user) %></td>
-                </tr>
+                <% @reviews.each do |review| %>
+                  <tr>
+                    <td class = "text-center" nowrap><h4><%= link_to review.shop, review_path(review, from_mypage: true) %></h4></td>
+                    <td class = "text-center" nowrap><%= review.genre %></td>
+                    <td class = "text-center" nowrap><%= review.title %></td>
+                    <td class = "text-center" id = "comment_count">
+                      <%= render "user/comments/count", review: review %>
+                    </td>
+                    <td class = "text-center"><%= review.favorites.count %></td>
+                    <td nowrap><%= link_to "編集", edit_review_path(review), class: "btn btn-sm btn-success", data: {turbolinks: "false"} %></td>
+                    <td nowrap><%= link_to "削除", review_path(review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %></td>
+                  </tr>
+                <% end %>
               </tbody>
             </table>
-            <div class = "text-center"><%= link_to "編集" , information_edit_path, class: "btn btn-sm btn-success" %></div>
           </div>
-        </div>
+          <div class = "d-flex justify-content-center">
+            <%= paginate @reviews %>
+          </div>
+        <% end %>
       </div>
-  </div>
-
-
-  <div>
-    <div class = "mt-4 mb-2">
-      <h5>マイレビュー一覧</h5>
+      <h4 class = "text-center mt-5"><%= link_to "退会する" , unsubscribe_path, class: "btn btn-danger" %></h4>
+      
     </div>
-
-    <% if @reviews.empty? %>
-      投稿はまだありません
-    <% else %>
-      <div class = "d-flex justify-content-end">
-        <%= link_to '新しい順', mypage_path(latest: "true") %>
-        |<%= link_to '古い順', mypage_path(old: "true") %>
-        |<%= link_to '人気順', mypage_path(favorite_count: "true") %>
-      </div>
-      <table class="table border table-hover">
-        <thead style="background-color: #ffe6ee;">
-          <tr>
-            <th class = "text-center">店名</th>
-            <th class = "text-center">ジャンル</th>
-            <th class = "text-center">タイトル</th>
-            <th class = "text-center">コメント数</th>
-            <th class = "text-center">いいね数</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @reviews.each do |review| %>
-            <tr>
-              <td class = "text-center"><h4><%= link_to review.shop, review_path(review, from_mypage: true) %></h4></td>
-              <td class = "text-center"><%= review.genre %></td>
-              <td class = "text-center"><%= review.title %></td>
-              <td class = "text-center" id = "comment_count">
-                <%= render "user/comments/count", review: review %>
-              </td>
-              <td class = "text-center"><%= review.favorites.count %></td>
-              <td><%= link_to "編集" , edit_review_path(review), class: "btn btn-sm btn-success" %></td>
-              <td><%= link_to "削除" , review_path(review), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <div class = "d-flex justify-content-center">
-        <%= paginate @reviews %>
-      </div>
-    <% end %>
   </div>
-  <h4 class = "text-center mt-5"><%= link_to "退会する" , unsubscribe_path, class: "btn btn-danger" %></h4>
 </div>
