@@ -1,21 +1,25 @@
 @use '~bootstrap/scss/bootstrap';
 
+// CSSリセット
 * {
 margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
 
+// 文字のフォント・背景のイメージ
 body {
   font-family: 'Open Sans', 'Kosugi', sans-serif;
   background-image: url('../images/back-image.jpg');
   background-size: cover;
 }
 
+// フッターの下の隙間をなくすために設定
 .main {
   min-height: 60vh;
 }
 
+// 要素が背景と重なって見づらいので設定
 .col-10 {
   background-color: #ffffff;
 }
@@ -88,6 +92,7 @@ body {
   height: calc(100vh - 88px - 179px);
 }
 
+// スマホ画面サイズになったときに下記条件になる
 @media screen and (max-width:375px) {
   .hosi {
     font-size: 8px;
@@ -100,5 +105,13 @@ body {
 
   #error_explanation{
     font-size: 10px;
+  }
+
+  .mini {
+    font-size: 15px;
+  }
+
+  .mini1 {
+    font-size: 13px;
   }
 }

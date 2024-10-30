@@ -1,9 +1,9 @@
 <div class = "container my-5">
   <div class="row justify-content-center">
     <div class="col-10">
-      
+
       <div class = "border py-3 px-4">
-        <h2 class="text-nowrap"><%= @user.name %>さんのページ</h2>
+        <h2 class="text-nowrap mini"><%= @user.name %>さんのページ</h2>
           <div class = "container">
             <% if @user.local_person == "local" %>
               <h4 class="person_local mt-4"><%= I18n.t("enums.user.local_person.#{@user.local_person}") %></h4>
@@ -18,7 +18,7 @@
                 <table class="table table-sm">
                   <tbody>
                     <tr>
-                      <th>名前：</th><td><h4><%= @user.name %></h4></td>
+                      <th>名前：</th><td><h4 class = "mini"><%= @user.name %></h4></td>
                     </tr>
                     <tr>
                       <th>一言：</th><td><%= @user.introduction %></td>
@@ -32,17 +32,17 @@
             </div>
           </div>
       </div>
-    
+
       <div class = "d-flex justify-content-center mt-3 mb-5">
         <%= link_to "戻る", "#", onclick: "history.back(); return false;" %>
         <!--元のページのソート機能を保持したまま戻ることができる-->
       </div>
-    
+
       <div>
         <div class = "mt-4 mb-2">
           <h5><%= @user.name %>さんのレビュー一覧</h5>
         </div>
-    
+
         <% if @reviews.empty? %>
           投稿はまだありません
         <% else %>

@@ -16,6 +16,7 @@ class User::ReviewsController < ApplicationController
     end
   end
 
+# ソート機能とフィルター機能と検索機能の条件に合わせて分岐させている
   def index
     @reviews = Review.includes(:user).where(users: { is_active: true }).latest.page(params[:page]).per(10)
     sort = params[:sort]
