@@ -26,6 +26,7 @@ async function initMap() {
     const response = await fetch("/reviews.json");
     if (!response.ok) throw new Error('Network response was not ok');
 
+
     const { data: { items } } = await response.json();
     if (!Array.isArray(items)) throw new Error("Items is not an array");
 
@@ -80,7 +81,7 @@ async function initMap() {
       });
     });
   } catch (error) {
-    console.error('Error fetching or processing post images:', error);
+    console.error('Error fetching or processing review:', error);
   }
 }
 

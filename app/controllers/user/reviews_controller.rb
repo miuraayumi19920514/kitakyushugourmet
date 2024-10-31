@@ -91,7 +91,7 @@ class User::ReviewsController < ApplicationController
     review.destroy
     redirect_to mypage_path
   end
-  
+
   private
   def review_params
     params.require(:review).permit(:shop, :address, :genre, :title, :body, :star, :image)

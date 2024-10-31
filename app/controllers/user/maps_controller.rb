@@ -2,7 +2,7 @@ class User::MapsController < ApplicationController
   before_action :redirect_to_signup_unless_logged_in
   def show
   end
-  
+
   private
   def redirect_to_signup_unless_logged_in#ログインしていなければ、mapを開こうとしたら新規登録画面に遷移する
     unless user_signed_in?
@@ -10,5 +10,5 @@ class User::MapsController < ApplicationController
     end
   end
 
-  
+
 end

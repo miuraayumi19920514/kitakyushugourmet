@@ -5,7 +5,7 @@ json.data do
       json.user do
         json.name review.user.name
       end
-      json.image url_for(review.image)
+      json.image url_for(review.get_image(100,100))
       json.shop review.shop
       json.address review.address
       json.genre review.genre
